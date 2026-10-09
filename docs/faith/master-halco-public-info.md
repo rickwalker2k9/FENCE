@@ -51,11 +51,9 @@ Online tools: a Customer Portal and QuoteMaster (quotemaster.masterhalco.com).
 - Branch manager: John Flowers
 - Services: will call, delivery to customer, delivery to jobsite,
   truck-mounted forklifts, gate manufacturing, pipe cutting
-- Note: older directory listings show a Master-Halco at 8146 SW 15th St,
-  Oklahoma City (OKC #060, phone (405) 627-9600). Master-Halco's own
-  website lists the Oklahoma City branch at 924 S Morgan Rd. If someone
-  asks about SW 15th St, point them to S Morgan Rd and suggest they call
-  (405) 745-6969 to confirm.
+- This is Master-Halco's only Oklahoma City location. If someone mentions
+  an older address (such as SW 15th St), tell them the OKC branch is at
+  924 S Morgan Rd.
 
 ### Stocked at Oklahoma City
 - Chain link fence systems
@@ -282,3 +280,14 @@ Online tools: a Customer Portal and QuoteMaster (quotemaster.masterhalco.com).
 - Known terms: PostMaster+ lifetime warranty (when post spacing guidance is
   followed); ARMA Gate 5 years; Series 8000 swing gates 5-year limited;
   Wood Defender transparent 2 years, semi-transparent 3 years.
+
+## Branch network (from masterhalco.com/find-a-branch, October 2026)
+- Master-Halco says "over 70 locations across the U.S. and Canada". The branch finder lists 70: 65 in the U.S. (32 states) and 5 in Canada. It operates only in the U.S. and Canada, not elsewhere in the world.
+- Oklahoma has 2 branches: Oklahoma City (924 S Morgan Rd, the only OKC location) and Tulsa.
+- Texas has the most, 16: Austin (Morris Rd), Burleson, Conroe (new), Dallas, El Paso, Fort Worth, North Fort Worth, Frisco, Garland, Houston (Aldine Westfield Rd), Hurst, Lubbock, McKinney, San Antonio, Stafford, Tyler.
+- Canada (5): Calgary, Halifax (new), Montreal and Quebec City (both as Clotures Bel-Air), Toronto.
+- Other U.S. branches: Mobile AL; Phoenix AZ; Fresno, Los Angeles, Sacramento, San Diego CA; Denver CO and The Deck Superstore (Commerce City, CO); Hartford CT; Tallahassee, Miami, Orlando, Tampa FL; Decatur (Atlanta) and Stockbridge GA; Des Moines IA; Boise ID (new); Chicago and Olney IL; Indianapolis IN; Kansas City and St. Louis MO; Shreveport LA; Boston MA; Detroit MI; Minneapolis MN; Pearl MS; Charlotte and Raleigh NC; Manchester NH; Albuquerque NM; Rochester and New York NY; Cincinnati OH; Portland OR; Philadelphia and Pittsburgh PA; Charleston SC; Knoxville, Bluff City, Nashville, Memphis TN; Salt Lake City UT; Richmond VA; Seattle and Spokane WA; Milwaukee WI.
+- For any other branch's address or phone, give the branch locations line 888-643-3623 or the branch finder at masterhalco.com/find-a-branch.
+
+## Master Halco Gives Back
+- Charity program that pairs each local branch with a local charity to donate to. It raised over $354,000 in 2025. Customers can take part through their branch.
