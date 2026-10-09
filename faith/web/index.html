@@ -109,11 +109,11 @@
   .caps-title h2 { font: 400 50px/1 "League Gothic"; text-transform: uppercase; color: var(--navy); }
   .caps-title img { height: 64px; }
   .caps .sub { text-align: center; color: var(--muted); margin-top: 8px; }
-  .caps-frame { position: relative; overflow: hidden; margin-top: 30px; border-radius: 28px; padding: 26px 40px;
-    border: 3px solid transparent; background: linear-gradient(110deg, #fff 0%, #fff 45%, #eaf5f4 75%, #e3ecf6 100%) padding-box, var(--grad) border-box; }
-  .caps-faith { position: absolute; right: 5%; bottom: -30%; height: 130%; width: auto; max-width: none; pointer-events: none;
-    -webkit-mask-image: linear-gradient(to left, #000 45%, transparent 92%); mask-image: linear-gradient(to left, #000 45%, transparent 92%); }
-  .cards { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: 0; max-width: 520px; }
+  .caps-frame { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: 8px; margin-top: 30px; border-radius: 28px; overflow: hidden;
+    border: 3px solid transparent; background: linear-gradient(115deg, #fff 0%, #fff 48%, #e8f4f3 78%, #e1ebf6 100%) padding-box, var(--grad) border-box; }
+  .cards { display: grid; grid-template-columns: 1fr; gap: 0; padding: 18px 0 18px 34px; align-self: center; }
+  .caps-faith { display: block; height: 470px; width: auto; margin-right: 10px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22%); mask-image: linear-gradient(to right, transparent 0, #000 22%); }
   .card { display: grid; grid-template-columns: 44px 1fr; column-gap: 14px; align-items: start; padding: 16px 0; border-bottom: 1px solid var(--line); }
   .card .ic { grid-row: span 2; width: 44px; height: 44px; border-radius: 50%; background: #eaf6f5; display: grid; place-items: center; }
   .card .ic svg { width: 21px; height: 21px; stroke: var(--blue); fill: none; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
@@ -148,9 +148,14 @@
     .copy { padding: 34px 0 8px; }
     .hero-video { padding: 20px 0 10px; }
     .video { margin-left: auto; margin-right: auto; }
-    .caps-frame { padding: 18px 18px; }
-    .caps-faith { opacity: .3; right: -22%; bottom: -12%; height: 112%; -webkit-mask-image: linear-gradient(to left, #000 30%, transparent 85%); mask-image: linear-gradient(to left, #000 30%, transparent 85%); }
-    .cards { max-width: none; }
+    .caps-frame { margin-left: -10px; margin-right: -10px; border-radius: 22px; column-gap: 0; }
+    .cards { padding: 8px 0 8px 14px; }
+    .card { grid-template-columns: 30px 1fr; column-gap: 9px; padding: 11px 0; }
+    .card .ic { width: 30px; height: 30px; }
+    .card .ic svg { width: 16px; height: 16px; }
+    .card h3 { font-size: 14px; }
+    .card p { font-size: 12.5px; line-height: 1.35; }
+    .caps-faith { height: 372px; margin-right: -22px; margin-left: -6px; }
     .caps-title h2, .talk h2 { font-size: 32px; }
     .caps-title img { height: 50px; }
     .cta h2 { font-size: 38px; }
@@ -222,7 +227,6 @@
   <section class="wrap caps">
     <div class="caps-title"><h2>What I do for</h2><img src="/logo.webp" alt="Master-Halco"></div>
     <div class="caps-frame">
-    <img class="caps-faith" src="/faith-cut.webp" alt="" aria-hidden="true">
     <div class="cards">
       <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3 3 0 0 1 0 6M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></div><h3>Answers your contractors and crews</h3><p><em>so</em> your counter can keep selling.</p></div>
       <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h3"/></svg></div><h3>Builds material lists in seconds</h3><p><em>so</em> orders are ready before they call.</p></div>
@@ -230,6 +234,7 @@
       <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>On shift 24/7</h3><p><em>so</em> you never miss a night or weekend order.</p></div>
       <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div><h3>Hablo español</h3><p><em>so</em> Spanish-speaking crews are covered too.</p></div>
     </div>
+    <img class="caps-faith" src="/faith-cut.webp" alt="Faith" width="758" height="1350">
     </div>
   </section>
 
