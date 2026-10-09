@@ -22,7 +22,7 @@ from faith.estimator import EstimateError, estimate
 MAX_BODY = 64 * 1024
 WEB = Path(__file__).with_name("web")
 TYPES = {".html": "text/html; charset=utf-8", ".jpg": "image/jpeg", ".png": "image/png", ".webp": "image/webp",
-         ".mp4": "video/mp4", ".webm": "video/webm", ".js": "text/javascript; charset=utf-8"}
+         ".mp4": "video/mp4", ".webm": "video/webm", ".js": "text/javascript; charset=utf-8", ".woff2": "font/woff2"}
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -46,8 +46,8 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/health":
             return self._send(200, {"ok": True})
         name = "index.html" if path == "/" else path.lstrip("/")
-        file = WEB / name
-        if "/" not in name and file.suffix in TYPES and file.is_file():
+        file = (WEB / name).resolve()
+        if file.is_relative_to(WEB.resolve()) and file.suffix in TYPES and file.is_file():
             return self._file(file, head_only)
         self._send(404, {"error": "not found"})
 

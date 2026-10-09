@@ -6,8 +6,15 @@
 <title>Chat with Faith · Master-Halco</title>
 <meta name="description" content="Faith, the AI assistant built for Master-Halco. Talk or type, ask her anything.">
 <link rel="icon" href="/faith.jpg">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  @font-face { font-family: "Inter"; font-weight: 400; font-display: swap; src: url("/fonts/inter-400.woff2") format("woff2"); }
+  @font-face { font-family: "Inter"; font-weight: 500; font-display: swap; src: url("/fonts/inter-500.woff2") format("woff2"); }
+  @font-face { font-family: "Inter"; font-weight: 600; font-display: swap; src: url("/fonts/inter-600.woff2") format("woff2"); }
+  @font-face { font-family: "Inter"; font-weight: 700; font-display: swap; src: url("/fonts/inter-700.woff2") format("woff2"); }
+  @font-face { font-family: "Inter"; font-weight: 800; font-display: swap; src: url("/fonts/inter-800.woff2") format("woff2"); }
+  @font-face { font-family: "Barlow Condensed"; font-weight: 700; font-display: swap; src: url("/fonts/barlow-condensed-700.woff2") format("woff2"); }
+  @font-face { font-family: "Barlow Condensed"; font-weight: 800; font-display: swap; src: url("/fonts/barlow-condensed-800.woff2") format("woff2"); }
+  @font-face { font-family: "Barlow Condensed"; font-weight: 900; font-display: swap; src: url("/fonts/barlow-condensed-900.woff2") format("woff2"); }
   :root { --blue:#224ba3; --navy:#0e1f4a; --navy2:#13285c; --teal:#51b09a; --teal2:#7fd3bf; --mint:#a6ecd9; --ink:#1b2233; --muted:#5a6478; --line:#e3e8f0; }
   @property --a { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,8 +40,9 @@
   .copy { padding: 56px 0 120px; }
   .kicker { display: inline-flex; align-items: center; gap: 10px; font: 800 12px/1 "Inter"; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); }
   .kicker::before { content: ""; width: 30px; height: 2px; background: var(--teal); }
-  h1 { font: 900 clamp(76px, 10.5vw, 128px)/.84 "Barlow Condensed"; text-transform: uppercase; color: var(--navy); margin-top: 14px; }
-  h1 em { font-style: normal; color: var(--blue); }
+  h1 { font: 900 clamp(96px, 12.5vw, 156px)/.84 "Barlow Condensed"; text-transform: uppercase; color: var(--navy); margin-top: 14px; }
+  h1 em { display: block; font-style: normal; color: var(--blue); }
+  h1 .hi { display: block; text-transform: none; font-size: .42em; line-height: 1; letter-spacing: 0; word-spacing: -.02em; margin-bottom: .06em; }
   h1 em .ai { color: var(--teal); }
   .lede { margin-top: 20px; font: 600 clamp(18px, 2vw, 22px)/1.4 "Inter"; color: var(--navy); max-width: 520px; }
   .lede span { color: var(--blue); }
@@ -170,7 +178,7 @@
     <div class="wrap">
       <div class="copy">
         <div class="kicker">Built for Master-Halco</div>
-        <h1>Hi, I'm<br><em>F<span class="ai">ai</span>th.</em></h1>
+        <h1><span class="hi">Hi, I&rsquo;m</span><em>F<span class="ai">ai</span>th.</em></h1>
         <p class="lede">I'll chat with your contractors, your crews and your counter.</p>
         <div class="video" id="video">
           <video src="/faith-720.mp4" controls playsinline preload="metadata" poster="/faith-video-cover.jpg"></video>
