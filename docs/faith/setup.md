@@ -2,7 +2,7 @@
 
 ## Live agent
 - **Agent:** `Faith — Master-Halco`, ID `agent_8901m4f8szxreakbd0e4hr9rvfnr`
-- **Voice:** Allison – Warm, Confident & Natural (`5jVVMAv2LzffTcLGarKh`)
+- **Voice:** Brielle (`6u6JbqKdaQy89ENzLSju`), the same voice as Claire; stability 0.5, similarity 0.75, speed 1.0
 - **LLM:** gemini-2.5-flash, temperature 0.3, timezone America/Chicago
 - **Knowledge base:** "Faith knowledge base" (RAG on)
 - **System tools:** End call, Language detection; Spanish preset added
