@@ -1,6 +1,7 @@
 """Webhook tools for the Faith voice/chat agent.
 
-    POST /tools/fence_estimate   JSON job in, takeoff out (see docs/faith/tools.md)
+    GET  /                       the "Chat with Faith" page (faith/web/)
+    POST /tools/fence_estimate   JSON job in, takeoff out (see docs/faith/setup.md)
     GET  /health
 
 Every call must send `x-faith-key` matching FAITH_ASSISTANT_KEY, the same way
@@ -13,11 +14,14 @@ from __future__ import annotations
 import hmac
 import json
 import os
+from pathlib import Path
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 from faith.estimator import EstimateError, estimate
 
 MAX_BODY = 64 * 1024
+WEB = Path(__file__).with_name("web")
+STATIC = {"/": ("index.html", "text/html; charset=utf-8"), "/faith.jpg": ("faith.jpg", "image/jpeg"), "/logo.jpg": ("logo.jpg", "image/jpeg")}
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -37,8 +41,19 @@ class Handler(BaseHTTPRequestHandler):
         return bool(key) and hmac.compare_digest(key.encode(), sent.encode())
 
     def do_GET(self):
-        if self.path == "/health":
+        path = self.path.split("?")[0]
+        if path == "/health":
             return self._send(200, {"ok": True})
+        if path in STATIC:
+            name, ctype = STATIC[path]
+            data = (WEB / name).read_bytes()
+            self.send_response(200)
+            self.send_header("content-type", ctype)
+            self.send_header("content-length", str(len(data)))
+            self.send_header("cache-control", "public, max-age=300")
+            self.end_headers()
+            self.wfile.write(data)
+            return
         self._send(404, {"error": "not found"})
 
     def do_POST(self):
@@ -67,7 +82,7 @@ class Handler(BaseHTTPRequestHandler):
 
 def main() -> None:
     if not os.environ.get("FAITH_ASSISTANT_KEY"):
-        raise SystemExit("Set FAITH_ASSISTANT_KEY before starting the tool server.")
+        print("FAITH_ASSISTANT_KEY is not set: the page works, but the takeoff tool refuses every call.")
     port = int(os.environ.get("PORT", "8080"))
     print(f"Faith tools listening on :{port}")
     ThreadingHTTPServer(("0.0.0.0", port), Handler).serve_forever()

@@ -142,6 +142,11 @@ class Server(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertIn("How many total feet", body["spoken"])
 
+    def test_serves_chat_page(self):
+        with urllib.request.urlopen(self.url.replace("/tools/fence_estimate", "/")) as res:
+            self.assertEqual(res.status, 200)
+            self.assertIn(b"Chat with Faith", res.read())
+
     def test_rejects_wrong_key(self):
         self.assertEqual(self.post({"total_feet": 10}, key="nope")[0], 401)
 
