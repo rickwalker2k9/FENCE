@@ -41,9 +41,9 @@
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
   .chip { font: 700 12px/1 "Inter"; color: var(--navy); background: #eef6f3; border: 1px solid rgba(81,176,154,.55); border-radius: 999px; padding: 8px 12px; }
 
-  .video { margin-top: 26px; max-width: 520px; border-radius: 18px; overflow: hidden; background: var(--navy); position: relative;
+  .video { margin-top: 28px; width: 290px; max-width: 100%; border-radius: 18px; overflow: hidden; background: var(--navy); position: relative;
     box-shadow: 0 0 0 2px var(--teal), 0 0 28px rgba(81,176,154,.45), 0 20px 40px rgba(14,31,74,.25); }
-  .video video { display: block; width: 100%; height: auto; max-height: 340px; background: #000; }
+  .video video { display: block; width: 100%; height: auto; aspect-ratio: 480 / 854; object-fit: cover; background: #000; }
   .video[hidden] { display: none; }
 
   /* Faith, full height, with layers behind her */
@@ -138,7 +138,8 @@
     .mast-logo { height: 64px; }
     .mast-talk { display: none; }
     .hero .wrap { grid-template-columns: 1fr; gap: 0; min-height: 0; }
-    .copy { padding: 34px 0 20px; }
+    .copy { padding: 34px 0 28px; }
+    .video { margin-left: auto; margin-right: auto; }
     .stage { min-height: 660px; margin: 0 -24px; overflow: hidden; }
     .panel { inset: 0; clip-path: none; }
     .band { left: 12px; }
@@ -171,8 +172,8 @@
         <div class="kicker">Built for Master-Halco</div>
         <h1>Hi, I'm<br><em>F<span class="ai">ai</span>th.</em></h1>
         <p class="lede">I'll chat with your contractors, your crews and your counter.</p>
-        <div class="video" id="video" hidden>
-          <video controls playsinline preload="metadata" poster="/faith.jpg"></video>
+        <div class="video" id="video">
+          <video src="/faith.mp4" controls playsinline preload="metadata" poster="/faith-video-poster.jpg"></video>
         </div>
       </div>
       <div class="stage" aria-hidden="true">
@@ -310,11 +311,6 @@
     $("typeForm").onsubmit = (e) => { e.preventDefault(); const v = $("typeIn").value.trim(); $("typeIn").value = ""; send(v); };
     document.querySelectorAll(".try button").forEach((b) => b.onclick = () => start(true, b.textContent.trim()));
 
-    // Faith's video shows in the hero once /faith.mp4 is uploaded.
-    fetch("/faith.mp4", { method: "HEAD" }).then((r) => {
-      if (!r.ok) return;
-      const box = $("video"); box.querySelector("video").src = "/faith.mp4"; box.hidden = false;
-    }).catch(() => {});
   </script>
 </body>
 </html>
