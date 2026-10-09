@@ -1,0 +1,122 @@
+{
+  "wood_post_4x4x8": {
+    "description": "4x4x8 post",
+    "sku": ""
+  },
+  "wood_post_4x4x10": {
+    "description": "4x4x10 post",
+    "sku": ""
+  },
+  "wood_post_4x4x12": {
+    "description": "4x4x12 post",
+    "sku": ""
+  },
+  "wood_post_4x4x14": {
+    "description": "4x4x14 post",
+    "sku": ""
+  },
+  "wood_post_4x4x16": {
+    "description": "4x4x16 post",
+    "sku": ""
+  },
+  "rail_2x4x8": {
+    "description": "2x4x8 rail",
+    "sku": ""
+  },
+  "picket_4ft": {
+    "description": "4 ft picket",
+    "sku": ""
+  },
+  "picket_5ft": {
+    "description": "5 ft picket",
+    "sku": ""
+  },
+  "picket_6ft": {
+    "description": "6 ft picket",
+    "sku": ""
+  },
+  "picket_7ft": {
+    "description": "7 ft picket",
+    "sku": ""
+  },
+  "picket_8ft": {
+    "description": "8 ft picket",
+    "sku": ""
+  },
+  "wood_walk_gate_kit": {
+    "description": "Wood walk-gate hardware kit",
+    "sku": ""
+  },
+  "wood_double_gate_kit": {
+    "description": "Wood double drive-gate hardware kit",
+    "sku": ""
+  },
+  "cl_line_post": {
+    "description": "Chain-link 1-7/8 in line post",
+    "sku": ""
+  },
+  "cl_terminal_post": {
+    "description": "Chain-link 2-3/8 in terminal post",
+    "sku": ""
+  },
+  "cl_fabric_roll": {
+    "description": "Chain-link fabric, 50 ft roll",
+    "sku": ""
+  },
+  "cl_top_rail": {
+    "description": "1-3/8 in top rail, 21 ft",
+    "sku": ""
+  },
+  "cl_tension_bar": {
+    "description": "Tension bar",
+    "sku": ""
+  },
+  "cl_tension_band": {
+    "description": "Tension band",
+    "sku": ""
+  },
+  "cl_brace_band": {
+    "description": "Brace band",
+    "sku": ""
+  },
+  "cl_rail_end": {
+    "description": "Rail end cup",
+    "sku": ""
+  },
+  "cl_dome_cap": {
+    "description": "Dome cap",
+    "sku": ""
+  },
+  "cl_loop_cap": {
+    "description": "Loop cap",
+    "sku": ""
+  },
+  "cl_tie_wire": {
+    "description": "Aluminum tie wire",
+    "sku": ""
+  },
+  "cl_walk_gate": {
+    "description": "Chain-link walk gate",
+    "sku": ""
+  },
+  "cl_double_gate": {
+    "description": "Chain-link double drive gate",
+    "sku": ""
+  },
+  "cl_gate_hinge": {
+    "description": "Gate hinge",
+    "sku": ""
+  },
+  "cl_fork_latch": {
+    "description": "Fork latch",
+    "sku": ""
+  },
+  "cl_cane_bolt": {
+    "description": "Cane bolt / drop rod",
+    "sku": ""
+  },
+  "concrete_60lb": {
+    "description": "60 lb post-hole concrete",
+    "sku": ""
+  }
+}
