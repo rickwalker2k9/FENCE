@@ -53,7 +53,7 @@
   .band { position: absolute; top: 0; bottom: 0; left: 30px; width: 18px; background: var(--teal); transform: skewX(-5.5deg); transform-origin: top; }
   .ring { position: absolute; border-radius: 50%; left: 50%; top: 18%; width: 360px; height: 360px; transform: translateX(-42%);
     border: 14px solid rgba(255,255,255,.75); box-shadow: 0 0 0 2px rgba(81,176,154,.6), inset 0 0 0 2px rgba(81,176,154,.6); }
-  .faith { position: absolute; bottom: 0; left: 50%; transform: translateX(-44%); height: 96%; width: auto; filter: drop-shadow(-12px 12px 20px rgba(14,31,74,.28)); }
+  .hero-faith { position: absolute; bottom: 0; left: 50%; transform: translateX(-44%); height: 96%; width: auto; filter: drop-shadow(-12px 12px 20px rgba(14,31,74,.28)); }
 
   /* ---------- Talk: right in the middle ---------- */
   .talk { position: relative; z-index: 5; margin-top: 90px; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 16px; }
@@ -64,6 +64,8 @@
   .orb::before { content: ""; position: absolute; inset: -9px; border-radius: 50%; z-index: 1;
     background: conic-gradient(from var(--a), var(--teal), var(--blue), var(--mint), var(--teal)); animation: spin 3.2s linear infinite; }
   .orb::after { content: ""; position: absolute; inset: -9px; border-radius: 50%; z-index: 0; border: 3px solid var(--teal); animation: pulse 1.8s ease-out infinite; }
+  .talk.on .orb { width: 92px; height: 92px; margin-top: -70px; }
+  .talk.on .live { margin-top: 10px; }
   .orb.speaking::after { animation-duration: .9s; border-color: var(--blue); }
   @keyframes spin { to { --a: 360deg; } }
   @keyframes pulse { from { transform: scale(1); opacity: .9; } to { transform: scale(1.35); opacity: 0; } }
@@ -84,9 +86,9 @@
   .status::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px rgba(81,176,154,.25); }
   .hint { text-align: center; color: var(--muted); font-size: 13.5px; margin-top: 6px; }
   .lines { margin-top: 14px; max-height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
-  .msg { font-size: 15px; line-height: 1.45; padding: 9px 13px; border-radius: 16px; max-width: 86%; }
+  .msg { font-size: 15px; line-height: 1.45; padding: 9px 13px; border-radius: 16px; max-width: 86%; text-align: left; overflow-wrap: anywhere; }
   .msg.you { background: #eef2f8; align-self: flex-end; border-bottom-right-radius: 5px; }
-  .msg.faith { background: var(--blue); color: #fff; align-self: flex-start; border-bottom-left-radius: 5px; }
+  .msg.her { background: var(--blue); color: #fff; align-self: flex-start; border-bottom-left-radius: 5px; }
   .type { display: flex; gap: 8px; margin-top: 12px; }
   .type input { flex: 1; min-width: 0; border: 1.5px solid var(--line); border-radius: 999px; padding: 12px 16px; font: 500 15px "Inter"; outline: none; }
   .type input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(81,176,154,.25); }
@@ -177,7 +179,7 @@
         <div class="panel"></div>
         <div class="band"></div>
         <div class="ring"></div>
-        <img class="faith" src="/faith-cut.webp" alt="">
+        <img class="hero-faith" src="/faith-cut.webp" alt="">
       </div>
     </div>
   </section>
@@ -282,7 +284,7 @@
           },
           onMessage: ({ message, role, source }) => {
             const text = String(message || "").replace(/\[[A-Za-z][A-Za-z ]{0,30}\]\s*/g, "").trim();
-            if (text) addLine((role || source) === "user" ? "you" : "faith", text);
+            if (text) addLine((role || source) === "user" ? "you" : "her", text);
           },
         };
         if (textMode) { opts.textOnly = true; opts.overrides = { conversation: { textOnly: true } }; }
