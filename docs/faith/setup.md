@@ -1,5 +1,14 @@
 # Setting up Faith (ElevenLabs Conversational AI agent)
 
+## Live agent
+- **Agent:** `Faith — Master-Halco`, ID `agent_8901m4f8szxreakbd0e4hr9rvfnr`
+- **Voice:** Allison – Warm, Confident & Natural (`5jVVMAv2LzffTcLGarKh`)
+- **LLM:** gemini-2.5-flash, temperature 0.3, timezone America/Chicago
+- **Knowledge base:** "Faith knowledge base" (RAG on)
+- **System tools:** End call, Language detection; Spanish preset added
+- **Still to do:** attach the `fence_estimate` webhook tool once the tool
+  server is deployed (step 1 and step 3 below).
+
 Same setup as Claire in Vantage. You need:
 - `agent-prompt.md` (her personality and rules);
 - `knowledge-base.md` (how the takeoff rules work);
