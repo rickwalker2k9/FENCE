@@ -11,15 +11,15 @@ Three texts, under a minute. Every number below is the real tool output
 ## 2. Faith's answer
 > Got it. 180 feet of 6 foot board-on-board with a 4 foot walk gate:
 > 22 bays at exactly 8 feet on center, 24 posts, 76 rails, 535 pickets with
-> 10% waste, and 52 bags of concrete. I centered the gate; tell me if it's
+> 10% waste, and 48 bags of concrete. I centered the gate; tell me if it's
 > by the house.
 >
 > - 22 × 4x4x8 posts (line and end, 24 in deep)
 > - 2 × 4x4x10 gate posts (36 in deep)
 > - 76 × 2x4x8 rails (66 + 10% waste, + 3 for the gate frame)
 > - 535 × 6 ft cedar pickets (board-on-board, 10% waste)
-> - 1 × walk-gate hardware kit
-> - 52 × 60 lb post-hole concrete
+> - Gate hardware: 2 T-hinges, 1 gravity latch, 1 D-handle, 1 gate spring
+> - 48 × 60 lb post-hole concrete (2 per hole)
 
 ## 3. The closer
 > Have you called OKIE811 yet? It's free and required before you dig.

@@ -29,18 +29,19 @@ status yet.
 
 ## 2. Wood privacy takeoff
 - Pickets: nominal 6 in (actual 5.5 in).
-  - Side-by-side: 12 ÷ 5.5 = 2.18 per linear foot (often quoted 2.17).
+  - Side-by-side: 2.17 per linear foot (12 ÷ 5.5 in).
   - Board-on-board / shadowbox: 2.7 per linear foot (two layers with about
     1 in overlap).
   - Gates are clad in the same pickets, so gate width counts toward pickets.
 - Rails (2x4x8): 2 per bay at 4–5 ft, 3 per bay at 6–7 ft, 4 per bay at 8 ft.
 - Gate frame: 3 extra 2x4x8 per walk gate, 6 per double gate.
+- Gate hardware: see section 3b.
 - Waste: 10% on pickets and rails (15% on slopes). Posts are exact.
 - Posts: 4x4, set 24 in deep (36 in for gate posts). Length = fence height +
   depth (+ step drop on a stepped fence), rounded up to stock 8, 10, 12, 14
   or 16 ft. A 6 ft fence uses 8 ft line posts and 10 ft gate posts.
-- Gates wider than 6 ft become a double drive gate. For any gate over 4 ft,
-  suggest 4x6 or 6x6 gate posts.
+- Gates wider than 6 ft default to a double drive gate. For any gate over
+  4 ft, suggest 4x6 or 6x6 gate posts.
 
 ## 3. Chain-link takeoff
 - Line posts: 1-7/8 in OD, set 24 in deep.
@@ -53,24 +54,38 @@ status yet.
 - Fabric: 50 ft rolls, fence footage + waste.
 - Top rail: 21 ft swaged sticks, counted per segment.
 - Ties: one every 12 in on line posts and every 24 in on top rail.
-- Gates: walk gate with 2 hinges and a fork latch; over 6 ft, a double drive
-  gate with 4 hinges, a fork latch and a cane bolt.
 - Bottom tension wire is optional and left off unless asked.
 
+## 3b. Gate hardware packages
+Every gate expands into a full package (`faith/gate_hardware.json`). Item
+codes are placeholders until mapped to Master-Halco item numbers.
+- **Wood single walk:** 2 × 8 in heavy-duty T-hinge, 1 self-locking gravity
+  latch, 1 × 6 in D-handle, 1 × 11 in gate spring.
+- **Wood double drive:** 4 × T-hinge, 1 gravity latch, 1 cane bolt / drop
+  rod, 1 D-handle.
+- **Chain-link single walk:** 2 × industrial female/male strap hinge, 1
+  industrial drop-fork latch.
+- **Chain-link double drive:** 4 × heavy-duty commercial box hinge, 1
+  StrongArm double-gate latch, 1 × 36 in industrial drop rod, 1 ground
+  center stop.
+- For double drive gates Faith always asks: automated or manual? Do you
+  want the drop rod, center stop and heavy-duty latch? Automated operators
+  and access control are specced by the counter.
+
 ## 4. Concrete
-- 10 in diameter holes. Faith computes the hole volume minus the post,
-  totals it for the job and divides by 0.45 cu ft per 60 lb bag, rounded up.
-- Rule of thumb: about 2 bags per 24 in line post, 3 per 36 in terminal or
-  gate post.
+- 10 in diameter holes, 2 bags (60 lb) per post hole.
+- Deep 36 in terminal and gate holes can take closer to 3 bags; the counter
+  can bump those if the crew wants a margin.
 
 ## 5. Slopes and terrain
 Faith asks: "Is the ground flat, or are we dealing with a slope?"
 - **Flat:** standard math.
 - **Racked:** the fence follows the ground. Material counts stay the same;
   measure footage along the slope. Good for mild, even slopes.
-- **Stepped:** each bay stays level and drops like a stair. Each post gets
-  taller by the drop per bay (spacing × grade). Waste goes to 15%. Expect
-  triangular gaps under the low end of each bay.
+- **Stepped:** each bay stays level and drops like a stair. Every post gets
+  at least 2 ft longer; on very steep ground (drop per bay over 2 ft) it gets
+  the full drop. Waste goes to 15%. Expect triangular gaps under the low end
+  of each bay.
 - Grade from a contractor: inches of drop per 10 ft ÷ 120 × 100 = grade %.
   (12 in drop over 10 ft = 10%.)
 

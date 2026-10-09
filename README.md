@@ -7,7 +7,8 @@ from the model's head.
 
 - `faith/estimator.py` — the takeoff engine (wood privacy, chain-link, slopes, gates, concrete).
 - `faith/server.py` — the `fence_estimate` webhook tool for the ElevenLabs agent.
-- `faith/catalog.json` — fill in Master-Halco item codes here.
+- `faith/catalog.json` and `faith/gate_hardware.json` — item codes and gate hardware packages.
+- `scripts/create_elevenlabs_agent.py` — creates the ElevenLabs agent in one command.
 - `docs/faith/agent-prompt.md` — Faith's system prompt and first message.
 - `docs/faith/knowledge-base.md` — the rules behind the math.
 - `docs/faith/setup.md` — ElevenLabs and Railway setup, step by step.

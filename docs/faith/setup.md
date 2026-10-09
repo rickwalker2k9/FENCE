@@ -17,7 +17,18 @@ field for each item). Faith reads them back when they're set. Point
 `FAITH_CATALOG` at another file to keep codes out of the repo.
 
 ## Step 2. ElevenLabs: create the agent
-**Agents → Create agent → Blank template.**
+**Fast way:** with the tool server live, run
+```
+export ELEVENLABS_API_KEY=...
+export FAITH_TOOL_URL=https://<domain>/tools/fence_estimate
+export FAITH_ASSISTANT_KEY=...
+python scripts/create_elevenlabs_agent.py
+```
+It creates the secret, the tool, the knowledge base and the agent, and prints
+the agent ID. If any step is rejected it says which; finish that part by hand
+below.
+
+**By hand:** **Agents → Create agent → Blank template.**
 
 - **Name:** `Faith — Master-Halco`
 - **Language:** English (add Spanish as an additional language)
@@ -52,10 +63,10 @@ Body parameters (JSON):
 | `runs` | array of numbers | each straight run, corner to corner, in feet |
 | `total_feet` | number | use instead of `runs` when only the total is known |
 | `corners` | integer | with `total_feet` |
-| `gates` | array of objects | `width_ft` (required), `run` (0-based run index), `at_ft` (distance from run start) |
+| `gates` | array of objects | `width_ft` (required), `style` (`single_walk`/`double_drive`), `automated` (true/false), `run` (0-based run index), `at_ft` (distance from run start) |
 | `style` | string | `board_on_board` or `side_by_side` (wood) |
 | `terrain` | string | `flat`, `racked` or `stepped` |
-| `grade_pct` | number | required for `stepped` |
+| `grade_pct` | number | optional; stepped posts get at least 2 ft extra |
 | `waste_pct` | number | default 10, or 15 on slopes |
 | `location` | string | e.g. `OKC`; adds the OKIE811 reminder |
 
@@ -68,14 +79,16 @@ Also add the system tools **End call** and **Language detection**.
 
 ## Step 5. Test
 1. "180 feet of 6 foot cedar board-on-board, flat, one 4 foot walk gate, in
-   OKC." → 22 bays at 8 ft, 24 posts, 76 rails, 535 pickets, 52 bags.
+   OKC." → 22 bays at 8 ft, 24 posts, 76 rails, 535 pickets, 48 bags.
 2. "Same thing but it's on a hill." → she asks racked or stepped, then the
    grade.
 3. "200 feet of 6 foot chain-link, one corner in the middle." → 21 posts,
    5 rolls of fabric.
-4. "What's that cost?" → she sends pricing to the counter.
-5. "Is it in stock?" → she doesn't promise stock.
-6. "Habla español?" → she switches.
+4. "Add a 12 foot double drive gate." → she asks automated or manual and
+   confirms the drop rod, center stop and StrongArm latch.
+5. "What's that cost?" → she sends pricing to the counter.
+6. "Is it in stock?" → she doesn't promise stock.
+7. "Habla español?" → she switches.
 
 ## Run it without ElevenLabs
 ```

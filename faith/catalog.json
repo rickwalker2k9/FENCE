@@ -43,14 +43,6 @@
     "description": "8 ft picket",
     "sku": ""
   },
-  "wood_walk_gate_kit": {
-    "description": "Wood walk-gate hardware kit",
-    "sku": ""
-  },
-  "wood_double_gate_kit": {
-    "description": "Wood double drive-gate hardware kit",
-    "sku": ""
-  },
   "cl_line_post": {
     "description": "Chain-link 1-7/8 in line post",
     "sku": ""
@@ -101,18 +93,6 @@
   },
   "cl_double_gate": {
     "description": "Chain-link double drive gate",
-    "sku": ""
-  },
-  "cl_gate_hinge": {
-    "description": "Gate hinge",
-    "sku": ""
-  },
-  "cl_fork_latch": {
-    "description": "Fork latch",
-    "sku": ""
-  },
-  "cl_cane_bolt": {
-    "description": "Cane bolt / drop rod",
     "sku": ""
   },
   "concrete_60lb": {

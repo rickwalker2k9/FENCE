@@ -1,0 +1,35 @@
+{
+  "_note": "sku_suffix values are placeholders until mapped to Master-Halco item numbers. Set sku_prefix to the branch/catalog prefix if codes are built from one.",
+  "sku_prefix": "",
+  "gate_hardware_packages": {
+    "wood_residential_single_walk": {
+      "hinges": {"sku_suffix": "WD-HINGE-STD", "quantity": 2, "description": "8-inch Heavy Duty T-Hinge Black"},
+      "latch": {"sku_suffix": "WD-LATCH-GRAV", "quantity": 1, "description": "Self-Locking Gravity Gate Latch"},
+      "accessories": [
+        {"sku_suffix": "WD-PULL-6IN", "quantity": 1, "description": "6-inch D-Handle Black Plated"},
+        {"sku_suffix": "WD-SPRING-11IN", "quantity": 1, "description": "11-inch Heavy Duty Gate Spring"}
+      ]
+    },
+    "wood_residential_double_drive": {
+      "hinges": {"sku_suffix": "WD-HINGE-STD", "quantity": 4, "description": "8-inch Heavy Duty T-Hinge Black"},
+      "latch": {"sku_suffix": "WD-LATCH-GRAV", "quantity": 1, "description": "Self-Locking Gravity Gate Latch"},
+      "accessories": [
+        {"sku_suffix": "WD-DROP-ROD-24", "quantity": 1, "description": "24-inch Cane Bolt / Drop Rod"},
+        {"sku_suffix": "WD-PULL-6IN", "quantity": 1, "description": "6-inch D-Handle Black Plated"}
+      ]
+    },
+    "chain_link_commercial_single_walk": {
+      "hinges": {"sku_suffix": "CL-HINGE-FEM-MALE", "quantity": 2, "description": "Industrial Female/Male Strap Hinge Combination"},
+      "latch": {"sku_suffix": "CL-LATCH-FORK", "quantity": 1, "description": "Industrial Drop-Fork Latch Assembly"},
+      "accessories": []
+    },
+    "chain_link_commercial_double_drive": {
+      "hinges": {"sku_suffix": "CL-HINGE-IND-BOX", "quantity": 4, "description": "Heavy Duty Commercial Box Hinges"},
+      "latch": {"sku_suffix": "CL-LATCH-STRONGARM", "quantity": 1, "description": "StrongArm Double Gate Latch Assembly"},
+      "accessories": [
+        {"sku_suffix": "CL-DROP-ROD-36", "quantity": 1, "description": "36-inch Industrial Drop Rod Assembly"},
+        {"sku_suffix": "CL-CENTER-STOP", "quantity": 1, "description": "Ground Center Gate Anchor Stop"}
+      ]
+    }
+  }
+}

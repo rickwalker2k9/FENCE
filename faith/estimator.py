@@ -24,7 +24,7 @@ MAX_SPACING_FT = {"wood_privacy": 8.0, "chain_link": 10.0}
 
 # Pickets per linear foot for a nominal 6 in (actual 5.5 in) picket.
 PICKETS_PER_FT = {
-    "side_by_side": 12 / 5.5,  # 2.18, often quoted as 2.17
+    "side_by_side": 2.17,
     "board_on_board": 2.7,  # front and back layers with about 1 in overlap
 }
 
@@ -37,17 +37,19 @@ CHAIN_LINK_DEPTH_IN = {"line": 24, "end": 36, "corner": 36, "gate": 36}
 
 HOLE_DIAMETER_IN = 10.0
 BAG_LB = 60
-BAG_YIELD_CU_FT = 0.45  # one 60 lb bag of post-hole concrete
+BAGS_PER_HOLE = 2
+
+# Stepped method: every post gets at least this much extra length for the drop.
+STEP_EXTRA_FT = 2.0
 
 WOOD_POST_STOCK_FT = (8, 10, 12, 14, 16)
-CHAIN_LINK_LINE_OD_IN = 1.875
-CHAIN_LINK_TERMINAL_OD_IN = 2.375
 FABRIC_ROLL_FT = 50
 TOP_RAIL_STICK_FT = 21
 
 DEFAULT_WASTE_PCT = 10.0
 SLOPE_WASTE_PCT = 15.0
-DOUBLE_GATE_OVER_FT = 6.0  # wider openings get a double drive gate
+DOUBLE_GATE_OVER_FT = 6.0  # wider openings default to a double drive gate
+GATE_STYLES = ("single_walk", "double_drive")
 
 FENCE_TYPES = ("wood_privacy", "chain_link")
 STYLES = tuple(PICKETS_PER_FT)
@@ -65,6 +67,8 @@ class Gate:
     width_ft: float
     run: int = 0  # index into runs
     at_ft: float | None = None  # distance from the start of the run to the gate's near edge
+    style: str = "single_walk"
+    automated: bool | None = None  # None = not asked yet
 
 
 @dataclass
@@ -114,7 +118,13 @@ class Job:
             if not 0 <= run < len(runs):
                 raise EstimateError(f"There's no run {run + 1} on this job.")
             at = g.get("at_ft")
-            gates.append(Gate(width_ft=_pos(g.get("width_ft"), "Gate width"), run=run, at_ft=None if at is None else float(at)))
+            width = _pos(g.get("width_ft"), "Gate width")
+            gstyle = _norm(g.get("style") or ("double_drive" if width > DOUBLE_GATE_OVER_FT else "single_walk"))
+            gstyle = {"walk": "single_walk", "single": "single_walk", "double": "double_drive", "drive": "double_drive"}.get(gstyle, gstyle)
+            if gstyle not in GATE_STYLES:
+                raise EstimateError("Is that gate a single walk gate or a double drive gate?")
+            auto = g.get("automated")
+            gates.append(Gate(width_ft=width, run=run, at_ft=None if at is None else float(at), style=gstyle, automated=None if auto is None else bool(auto)))
 
         style = _norm(d.get("style") or "board_on_board")
         style = {"shadowbox": "board_on_board", "bob": "board_on_board", "flat": "side_by_side", "stockade": "side_by_side"}.get(style, style)
@@ -125,8 +135,6 @@ class Job:
         if terrain not in TERRAINS:
             raise EstimateError("Is the ground flat, a mild slope we can rack, or steep enough to step?")
         grade = d.get("grade_pct")
-        if terrain == "stepped" and grade is None:
-            raise EstimateError("For a stepped fence I need the grade. Roughly how many inches does it drop per 10 feet?")
 
         height = float(d.get("height_ft") or 6)
         if fence_type == "wood_privacy" and int(round(height)) not in RAILS_PER_BAY:
@@ -242,9 +250,10 @@ def _layout(job: Job, max_spacing: float):
 
 # ---------------------------------------------------------------- takeoff
 
-def _hole_cu_ft(depth_in: float, displacement_sq_in: float) -> float:
-    hole = math.pi * (HOLE_DIAMETER_IN / 2) ** 2 * depth_in
-    return (hole - displacement_sq_in * depth_in) / 1728
+def _gate_packages() -> tuple[str, dict]:
+    path = Path(os.environ.get("FAITH_GATE_HARDWARE") or Path(__file__).with_name("gate_hardware.json"))
+    data = json.loads(path.read_text())
+    return data.get("sku_prefix") or "", data["gate_hardware_packages"]
 
 
 def _stock_length(need_ft: float) -> int | None:
@@ -276,15 +285,17 @@ def estimate(data: dict) -> dict:
     # Stepped fences need taller posts: each post carries the uphill panel's top.
     step_ft = 0.0
     if job.terrain == "stepped":
-        step_ft = max(s.on_center_ft for s in segments) * job.grade_pct / 100
-        job.assumptions.append(f"Stepped at {job.grade_pct:g}% grade: about {step_ft * 12:.0f} in drop per bay, added to every post.")
+        drop = max(s.on_center_ft for s in segments) * (job.grade_pct or 0) / 100
+        step_ft = max(STEP_EXTRA_FT, drop)
+        why = f"{job.grade_pct:g}% grade" if job.grade_pct else "stepped method"
+        job.assumptions.append(f"Stepped ({why}): added {step_ft:g} ft to every post for the drop.")
     elif job.terrain == "racked":
         job.assumptions.append("Racked to follow the ground; footage should be measured along the slope.")
 
     items: list[dict] = []
     add = lambda key, qty, desc, note="": items.append({"key": key, "item": desc, "qty": qty, "note": note})
     questions: list[str] = []
-    concrete_cu_ft = 0.0
+    holes = 0
     depth = WOOD_DEPTH_IN if job.fence_type == "wood_privacy" else CHAIN_LINK_DEPTH_IN
 
     if job.fence_type == "wood_privacy":
@@ -301,7 +312,7 @@ def estimate(data: dict) -> dict:
                 raise EstimateError(f"Those posts would need to be about {need:.0f} feet long. That slope is beyond a standard stepped fence; let's get the counter involved.")
             use = "gate posts" if key == "gate_post" else "line, end and corner posts"
             add(f"wood_post_4x4x{stock}", qty, f"4x4x{stock} post", f"{use}, set {d_in} in deep")
-            concrete_cu_ft += qty * _hole_cu_ft(d_in, 3.5 * 3.5)
+            holes += qty
 
         rails = bays * RAILS_PER_BAY[h]
         add("rail_2x4x8", math.ceil(rails * waste_x - 1e-9), "2x4x8 rail", f"{RAILS_PER_BAY[h]} per bay x {bays} bays, plus {waste:g}% waste")
@@ -314,14 +325,10 @@ def estimate(data: dict) -> dict:
         add(f"picket_{h}ft", pickets, f"{h} ft x 5.5 in picket", f"{style}, {rate:.2f} per ft over {_ft(picket_ft)}, plus {waste:g}% waste")
 
         for g in job.gates:
-            if g.width_ft > DOUBLE_GATE_OVER_FT:
-                add("wood_double_gate_kit", 1, f"Double drive-gate hardware kit ({_ft(g.width_ft)})", "4 hinges, cane bolt, latch")
+            if g.style == "double_drive":
                 add("rail_2x4x8", 6, "2x4x8 rail", f"6 for the gate frame, two {_ft(g.width_ft / 2)} leaves")
             else:
-                add("wood_walk_gate_kit", 1, f"Walk-gate hardware kit ({_ft(g.width_ft)})", "2 hinges, latch")
                 add("rail_2x4x8", 3, "2x4x8 rail", "3 for the gate frame and brace")
-        if any(g.width_ft > 4 for g in job.gates):
-            questions.append("That's a wide gate. Do you want 4x6 or 6x6 gate posts instead of 4x4?")
     else:
         h = job.height_ft
         terminals = posts["end"] + posts["corner"] + posts["gate"]
@@ -329,9 +336,9 @@ def estimate(data: dict) -> dict:
         term_len = h + depth["end"] / 12 + step_ft
         if posts["line"]:
             add("cl_line_post", posts["line"], f'1-7/8" line post, {_half_up(line_len):g} ft', f"set {depth['line']} in deep")
-            concrete_cu_ft += posts["line"] * _hole_cu_ft(depth["line"], math.pi * (CHAIN_LINK_LINE_OD_IN / 2) ** 2)
+            holes += posts["line"]
         add("cl_terminal_post", terminals, f'2-3/8" terminal post, {_half_up(term_len):g} ft', f"{posts['end']} end, {posts['corner']} corner, {posts['gate']} gate; set {depth['end']} in deep")
-        concrete_cu_ft += terminals * _hole_cu_ft(depth["end"], math.pi * (CHAIN_LINK_TERMINAL_OD_IN / 2) ** 2)
+        holes += terminals
 
         rolls = math.ceil(fence_ft * waste_x / FABRIC_ROLL_FT - 1e-9)
         add("cl_fabric_roll", rolls, f"{h:g} ft galvanized fabric, {FABRIC_ROLL_FT} ft roll", f"{_ft(fence_ft)} of fence plus {waste:g}%")
@@ -351,24 +358,23 @@ def estimate(data: dict) -> dict:
         ties = posts["line"] * math.ceil(h) + math.ceil(fence_ft / 2)
         add("cl_tie_wire", ties, "Aluminum tie wire", "every 12 in on line posts, every 24 in on top rail")
         for g in job.gates:
-            if g.width_ft > DOUBLE_GATE_OVER_FT:
+            if g.style == "double_drive":
                 add("cl_double_gate", 1, f"{h:g} ft x {_ft(g.width_ft)} double drive gate", "")
-                add("cl_gate_hinge", 4, "Gate hinge", "")
-                add("cl_cane_bolt", 1, "Drop rod / cane bolt", "")
-                add("cl_fork_latch", 1, "Fork latch", "")
             else:
                 add("cl_walk_gate", 1, f"{h:g} ft x {_ft(g.width_ft)} walk gate", "")
-                add("cl_gate_hinge", 2, "Gate hinge", "")
-                add("cl_fork_latch", 1, "Fork latch", "")
         questions.append("Do you want a bottom tension wire? I left it off.")
 
-    bags = math.ceil(concrete_cu_ft / BAG_YIELD_CU_FT - 1e-9)
-    add("concrete_60lb", bags, f"{BAG_LB} lb post-hole concrete", f'{HOLE_DIAMETER_IN:g}" holes, {concrete_cu_ft:.1f} cu ft total')
+    gate_items, gate_questions = _gate_hardware(job)
+    items += gate_items
+    questions = gate_questions + questions
+
+    bags = holes * BAGS_PER_HOLE
+    add("concrete_60lb", bags, f"{BAG_LB} lb post-hole concrete", f"{BAGS_PER_HOLE} per hole x {holes} holes")
 
     items = _merge(items)
     catalog = _catalog()
     for it in items:
-        it["sku"] = (catalog.get(it["key"]) or {}).get("sku") or None
+        it["sku"] = it.get("sku") or (catalog.get(it["key"]) or {}).get("sku") or None
 
     total_posts = sum(posts.values())
     ocs = sorted({round(s.on_center_ft, 2) for s in segments})
@@ -400,13 +406,38 @@ def estimate(data: dict) -> dict:
             "posts": {**posts, "total": total_posts},
         },
         "materials": items,
-        "concrete": {"bags": bags, "bag_lb": BAG_LB, "cu_ft": round(concrete_cu_ft, 1)},
+        "concrete": {"bags": bags, "bag_lb": BAG_LB, "holes": holes},
         "waste_pct": waste,
         "assumptions": job.assumptions,
         "questions": questions,
         "basis": "Faith takeoff from standard fencing rules. Quantities only: stock and pricing come from the Master-Halco counter.",
         "spoken": _spoken(job, total_ft, bays, oc_text, total_posts, items, bags, waste),
     }
+
+
+def _gate_hardware(job: Job) -> tuple[list[dict], list[str]]:
+    """Gate hardware integrity: every gate expands into its full package."""
+    prefix, packages = _gate_packages()
+    material = "wood_residential" if job.fence_type == "wood_privacy" else "chain_link_commercial"
+    items: list[dict] = []
+    questions: list[str] = []
+    for g in job.gates:
+        pkg = packages.get(f"{material}_{g.style}")
+        if not pkg:
+            raise EstimateError("I don't have a hardware package for that gate yet. The counter will need to spec it.")
+        parts = [pkg["hinges"], pkg["latch"], *pkg.get("accessories", [])]
+        for part in parts:
+            items.append({"key": f"gate_{part['sku_suffix']}", "item": part["description"], "qty": part["quantity"], "note": f"{_ft(g.width_ft)} {g.style.replace('_', ' ')} gate", "sku": prefix + part["sku_suffix"]})
+        if g.style == "double_drive":
+            if g.automated is None:
+                questions.append(f"Is the {_ft(g.width_ft)} double drive gate automated or manual?")
+            elif g.automated:
+                questions.append(f"The {_ft(g.width_ft)} gate is automated: the operator and access control aren't in this list, so the counter will spec those.")
+            extras = ", ".join(a["description"] for a in pkg.get("accessories", []))
+            questions.append(f"I included {extras} and the {pkg['latch']['description']} on the {_ft(g.width_ft)} double gate. Keep all of it?")
+        if job.fence_type == "wood_privacy" and g.width_ft > 4:
+            questions.append(f"The {_ft(g.width_ft)} gate is wide for 4x4 posts. Want 4x6 or 6x6 gate posts?")
+    return items, questions
 
 
 def _half_up(x: float) -> float:
