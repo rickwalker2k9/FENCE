@@ -138,3 +138,147 @@ Online tools: a Customer Portal and QuoteMaster (quotemaster.masterhalco.com).
   Alta Forest Products, LiftMaster, Wheatland, U.S. Premier Tube Mills,
   Oklahoma Steel & Wire, Pexco, Wood Defender, D&D Technologies, Lockey,
   RangeMaster, Razor Ribbon and others.
+
+## Company history (milestones)
+- 1951: Master Fence Fittings founded (El Monte, California garage)
+- 1958: Master Pipe, Inc. added
+- 1961: Master Sales, Inc. (chain link fabric)
+- 1964: first sales branch, Hayward, California
+- 1972: Olney, Illinois location and second manufacturing facility
+- 1980: acquired Halco Fence & Wire
+- 1984: the Master Halco name introduced
+- 1995: into Canada (McLellan Fencing; Master-Halco Ltd.)
+- 2005: Clôtures Lasalle and Clôtures Bel-Air in Quebec
+- 2019: acquired Jamieson Fence Supply
+- June 2024: acquired US Vinyl Fence and Forest Product Sales (Salt Lake City)
+- November 2024: acquired The Deck Superstore (Commerce City, Colorado)
+- 2025: new logo descriptor, "Fence & Deck Supply"
+
+## PostMaster steel posts (details from masterhalco.com)
+- PostMaster+ post types: line/end, corner, gate. Line and corner posts are
+  pre-galvanized G90 steel (line 0.100 in, corner 0.120 in thick); gate
+  posts are powder-coated black, 0.100 in, A653 SS Grade 50 (50 ksi yield,
+  65 ksi tensile), rated for 112.6 mph wind (ULT, ASCE 7-10, IBC 2012).
+- Benefits: lifetime warranty; wind resistance 73 to 112 mph; won't shrink,
+  warp or rot; hides behind the fence boards so neither side is the "ugly
+  side"; wider flanges hold rails better and reduce splitting; holes for
+  screws or lag bolts; concrete lock for strength. Gate posts hold the gate
+  straight and square; rails slide inside the post.
+- Post height guide (Master-Halco's chart):
+  - 6 ft fence: 7 ft 6 in post, max 8 ft on center (stocked at retailers),
+    or 8 ft post, max 8 ft on center (through pro fence contractors)
+  - 8 ft fence: 10 ft or 12 ft post, max 4 ft on center (pro contractors)
+  - Max on-center spacing must be kept to keep the warranty.
+- Set depth: at least 24 in into the ground for standard 6 ft and 8 ft
+  fences; check local code, and an engineer for anything unusual.
+- Available lengths: 6, 7, 7 ft 6 in, 8, 9, 10, 11 and 12 ft.
+- Item numbers (public on masterhalco.com):
+  - PostMaster+ line/end: 6 ft 013016, 7 ft 013019, 7 ft 6 in 013023,
+    8 ft 013026, 9 ft 013029, 10 ft 013032, 11 ft 013035, 12 ft 013038
+  - PostMaster+ corner: 6 ft 013017, 7 ft 013021, 7 ft 6 in 013024,
+    8 ft 013027, 9 ft 013030, 10 ft 013033, 11 ft 013036, 12 ft 013039
+  - PostMaster+ gate (black): 6 ft 013018, 7 ft 013022, 7 ft 6 in 013025,
+    8 ft 013028, 9 ft 013031, 10 ft 013034, 11 ft 013037, 12 ft 013040
+  - PostMaster+ corner clip 013041
+  - Original PostMaster: 6 ft 633660, 7 ft 633662, 7 ft 6 in 633663,
+    8 ft 633664, 9 ft 633666, 10 ft 633668, 11 ft 633674, 12 ft 633672;
+    PostMaster clip 633675; #10 x 1-1/4 in truss lath screw 633671
+  - PostMaster+ welded gate frames, 5 ft high, black with clip:
+    47 in N02267, 59 in N02268, 71 in N02269
+- DIY buyers can special-order PostMaster through the Pro Desk at Lowe's or
+  Home Depot; contractors buy through their Master-Halco branch.
+
+## Chain link details
+- Coatings: galvanized before weaving (GBW) or after weaving (GAW),
+  aluminized (aluminum-coated steel), and vinyl-coated color.
+- Color systems:
+  - Spectra: zinc-coated framework with a 3 mil minimum polyester color
+    coat, plus extruded PVC fabric.
+  - Spectra Bond: extruded bonded wire (adhesive seals the vinyl to the
+    wire) on Spectra or Heavy Mil framework; better protection than plain
+    extruded.
+  - Permafused: heavy-mil polyolefin (Class 2b) coating; best UV and
+    corrosion protection; ideal for commercial jobs.
+- Mesh: residential uses larger mesh; commercial and industrial use
+  smaller; high-security mini-mesh runs from 1-1/4 in down to 3/8 in;
+  privacy slat (PDS) diamond sizes 1-3/4, 2, 2-1/4 and 3-1/2 x 5 in.
+  Made to ASTM standards. Full gauge and framework charts are in the PDFs
+  on masterhalco.com.
+
+## Gates
+- Swing gates: walk and drive, galvanized or Spectra fabric, welded or bent
+  frames. Series 8000 pre-hung pedestrian gates (5-year limited warranty);
+  XLG Series 8600 for large swing openings.
+- Bent and welded frame single walk and double drive gates: residential
+  sizes stocked at all Master-Halco locations; galvanized, color fabric
+  with galvanized frame, or full color.
+- Slide gates (cantilever and roll): steel or aluminum, slide along the
+  fence line so no swing room is needed, easy to automate. Steel frame
+  cantilever (external rollers); steel and pipe roll gates (double-wheel
+  ground rollers). Infill: galvanized, aluminized, Spectra, Spectra Bond,
+  Permafused or SlatMaster; barbed wire optional.
+- Aluminum cantilever gates (factory welded, ship with manual hardware):
+  - SurTrac: standard to heavy duty, 10 to 30 ft single openings
+  - TrusTrac Series 1000: light duty, up to 22 ft
+  - TrusTrac Series 2000: medium duty, up to 28 ft
+  - TrusTrac Series 3000: heavy duty, up to 34 ft
+  - TrusTrac II Series 3000: heavy duty, up to 40 ft
+  - TwinTrac: heavy duty, 32 to 50 ft
+  - ValuTrac (aluminum V-track): large spans, maintenance-free wheels
+- ARMA Gate (exclusive to Master-Halco, by Secure Orbit Inc.): modular
+  aluminum cantilever gate with splice technology. Doesn't ride on a track
+  or wheels; panelized, so a damaged section is replaced (same-day
+  repairs) instead of the whole gate. Two-man crew and a trailer, no heavy
+  equipment; spans like 40 ft. Accessories: Click-Lock system, tension
+  tool, infill kit, barb arm kit, gap filler. 5-year warranty.
+
+## Access control
+- Swing and slide operators, single or double, from light-duty residential
+  to heavy-duty commercial (300+ cycles a day), industrial and high
+  security. Brands include LiftMaster (e.g., 6000 and 6500 swing
+  operators) and Cellgate (Watchman 410 keypad with camera); OKC also
+  stocks HySecurity, US Automatic, All-O-Matic, DoorKing and Linear.
+- Accessories: remotes, keypads, loop detectors, card access, contact
+  (safety edges) and non-contact (photo eyes) entrapment protection,
+  battery backup, solar units.
+
+## Wood
+- Western Red Cedar: premium residential choice; board widths 3-1/2,
+  5-1/2 and 7-1/2 in (actual); naturally insect and decay resistant, low
+  shrinkage, resists warping and twisting, takes stain and holds nails
+  well.
+- Pre-stained fencing (new): Alta Forest Products wood with Wood Defender
+  factory pre-stain, in Western Red Cedar or Douglas fir. Colors: Oxford
+  Brown, Leatherwood, Cedartone. Fence heights 4 to 8 ft; board widths
+  3-1/2 to 6 in. UV and moisture protection plus wax end seal; no waiting
+  to stain, curb-appeal-ready on day one.
+- Wood Defender stain: one coat, no back-brushing. Transparent fence
+  stain and sealant: 100 to 150 sq ft per gallon, 2-year warranty.
+  Semi-transparent: 150 to 200 sq ft per gallon, 3-year warranty. 200
+  Series multipurpose: 150 to 250 sq ft per gallon, California compliant
+  (under 100 g/L VOC). Waterproof, UV and mildew resistant.
+
+## Vinyl (PVC)
+- Lines: Catalyst and Illusions (Grand Illusions Color Spectrum and Vinyl
+  Woodbond), plus woodgrain vinyl. Styles include solid privacy and
+  privacy with square lattice top, smooth and textured woodgrain, and
+  railing. 36 main colors, with custom color matching. Never warps or
+  cracks, no staining or painting; vinyl railing has aluminum
+  reinforcement.
+
+## Agricultural fence guide (Master-Halco's chart)
+- Cattle: woven wire, barbed wire, electric wire, livestock panels
+- Horses: woven wire, livestock panels
+- Deer and wildlife: woven wire, electric wire, welded wire
+- Sheep and goats: woven wire, livestock panels, welded wire, split rail
+- Hogs: livestock panels
+- Small animals: welded wire, split rail
+- All of them: T-posts and round wood posts. High-tensile wire (higher
+  carbon steel, Class 3 coating) is also available.
+
+## Warranties
+- Register a fence install online at masterhalco.com/warranty-information;
+  all product warranties are listed at masterhalco.com/resource-catalogs/warranties.
+- Known terms: PostMaster+ lifetime warranty (when post spacing guidance is
+  followed); ARMA Gate 5 years; Series 8000 swing gates 5-year limited;
+  Wood Defender transparent 2 years, semi-transparent 3 years.
