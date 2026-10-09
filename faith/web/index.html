@@ -120,11 +120,9 @@
   .card h3 { font: 800 17px/1.25 "Inter"; color: var(--navy); }
   .card p { font-size: 15px; line-height: 1.45; color: var(--muted); margin-top: 3px; }
   .card p em { font-style: normal; font-weight: 800; color: var(--teal); }
-  .try { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; gap: 6px; }
-  .try p { font: 800 11px/1 "Inter"; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
-  .try button { background: none; border: 0; cursor: pointer; font: 600 15px/1.35 "Inter"; color: var(--blue); padding: 3px 6px; }
-  .try button::before { content: "“"; } .try button::after { content: "”"; }
-  .try button:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .langs { margin-top: 14px; display: flex; justify-content: center; gap: 6px; flex-wrap: nowrap; }
+  .langs button { font: 700 12px/1 "Inter"; color: var(--blue); background: #fff; border: 1px solid rgba(0,79,168,.3); border-radius: 999px; padding: 6px 11px; cursor: pointer; white-space: nowrap; }
+  .langs button[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
 
   /* ---------- Footer ---------- */
   .cta { position: relative; margin-top: 60px; background: var(--grad); color: #fff; overflow: hidden; }
@@ -200,12 +198,10 @@
         <p class="sub">One tap and you're talking. Ask me anything.</p>
         <button class="go" id="go" type="button"><i><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></i>Chat with Faith</button><br>
         <button class="alt" id="typeOnly" type="button">Prefer to type? Text with Faith</button>
-        <div class="try">
-          <p>Try asking:</p>
-          <button type="button">180 feet of 6 ft cedar board-on-board with a 4 ft walk gate.</button>
-          <button type="button">What do I need for 200 feet of chain-link with one corner?</button>
-          <button type="button">¿Me lo puedes explicar en español?</button>
-          <button type="button">Pouvez-vous m'expliquer ça en français?</button>
+        <div class="langs" role="group" aria-label="Faith's language">
+          <button type="button" data-lang="en" aria-pressed="true">English</button>
+          <button type="button" data-lang="es" aria-pressed="false">Español</button>
+          <button type="button" data-lang="fr" aria-pressed="false">Français</button>
         </div>
       </div>
       <div class="live" aria-live="polite">
@@ -262,6 +258,7 @@
 
     // Like Claire on the Vantage page: who Faith is talking with, and how the
     // last conversation ended, remembered in this browser only.
+    let lang = "en";
     const MEM = "faith-visitor";
     function recall() { try { return JSON.parse(localStorage.getItem(MEM) || "null") || {}; } catch { return {}; } }
     function remember(patch) { try { localStorage.setItem(MEM, JSON.stringify({ ...recall(), ...patch, at: Date.now() })); } catch {} }
@@ -313,7 +310,13 @@
           remember_visitor: ({ name, company }) => { if (name) remember({ name: String(name).slice(0, 40), company: company ? String(company).slice(0, 60) : me.company }); return "saved"; },
         };
         opts.overrides = {};
-        if (me.name) opts.overrides.agent = { firstMessage: "Hey " + me.name + ", good to have you back! Want to pick up where we left off, or start something new?" };
+        const back = {
+          en: (n) => "Hey " + n + ", good to have you back! Want to pick up where we left off, or start something new?",
+          es: (n) => "¡Hola, " + n + "! Qué gusto verte de nuevo. ¿Seguimos donde nos quedamos o empezamos algo nuevo?",
+          fr: (n) => "Allô " + n + ", content de te revoir! On reprend où on était, ou on part quelque chose de nouveau?",
+        };
+        if (lang !== "en") opts.overrides.agent = { language: lang };
+        if (me.name) opts.overrides.agent = { ...(opts.overrides.agent || {}), firstMessage: back[lang](me.name) };
         if (textMode) { opts.textOnly = true; opts.overrides.conversation = { textOnly: true }; }
         else opts.connectionType = "webrtc";
         conv = await window.ElevenLabsClient.Conversation.startSession(opts);
@@ -341,7 +344,10 @@
     $("end").onclick = async () => { const c = conv; reset(); if (c) await c.endSession().catch(() => {}); };
     $("mute").onclick = () => { if (!conv) return; muted = !muted; conv.setMicMuted(muted); $("mute").textContent = muted ? "Unmute mic" : "Mute mic"; };
     $("typeForm").onsubmit = (e) => { e.preventDefault(); const v = $("typeIn").value.trim(); $("typeIn").value = ""; send(v); };
-    document.querySelectorAll(".try button").forEach((b) => b.onclick = () => start(true, b.textContent.trim()));
+    const langBtns = document.querySelectorAll(".langs button");
+    function pickLang(l) { lang = l; langBtns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === l))); try { localStorage.setItem("faith-lang", l); } catch {} }
+    langBtns.forEach((b) => b.onclick = () => pickLang(b.dataset.lang));
+    try { const saved = localStorage.getItem("faith-lang"); if (saved && /^(en|es|fr)$/.test(saved)) pickLang(saved); } catch {}
 
   </script>
 </body>
