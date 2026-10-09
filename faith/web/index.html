@@ -125,10 +125,10 @@
     background: repeating-linear-gradient(45deg, rgba(255,255,255,.07) 0 1.2px, transparent 1.2px 24px),
                 repeating-linear-gradient(-45deg, rgba(255,255,255,.07) 0 1.2px, transparent 1.2px 24px); }
   .cta::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px; background: var(--teal); }
-  .cta .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 38px; padding-bottom: 34px; flex-wrap: wrap; }
+  .cta .wrap { display: flex; align-items: center; justify-content: center; padding-top: 40px; padding-bottom: 36px; }
   .cta h2 { font: 900 48px/.95 "Barlow Condensed"; text-transform: uppercase; }
   .cta p { color: #dbe4f5; margin-top: 6px; }
-  .cta .go { background: #fff; color: var(--blue); margin-top: 0; }
+  .cta .go { background: #fff; color: var(--blue); margin-top: 0; white-space: normal; text-align: left; }
   .foot { background: #fff; }
   .foot .wrap { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-top: 22px; padding-bottom: 26px; flex-wrap: wrap; }
   .foot img { height: 70px; }
@@ -229,8 +229,7 @@
 
   <section class="cta">
     <div class="wrap">
-      <div><h2>Ask me anything.</h2><p>Talk or type, in English or Spanish.</p></div>
-      <button class="go" id="go2" type="button"><i><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></i>Chat with Faith</button>
+      <button class="go" id="go2" type="button"><i><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></i>Press here to chat with Faith</button>
     </div>
   </section>
   <footer class="foot">
