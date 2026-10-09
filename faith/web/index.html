@@ -50,30 +50,10 @@
   .stage { position: relative; min-height: 640px; }
   .panel { position: absolute; inset: 0 -60px 0 0; background: linear-gradient(170deg, #eaf6f2 0%, #cfe9e1 45%, #a9d7ca 100%);
     clip-path: polygon(16% 0, 100% 0, 100% 100%, 0 100%); }
-  .panel::before { content: ""; position: absolute; inset: 0;
-    background: repeating-linear-gradient(45deg, rgba(34,75,163,.14) 0 1.3px, transparent 1.3px 26px),
-                repeating-linear-gradient(-45deg, rgba(34,75,163,.14) 0 1.3px, transparent 1.3px 26px); }
   .band { position: absolute; top: 0; bottom: 0; left: 30px; width: 18px; background: var(--teal); transform: skewX(-5.5deg); transform-origin: top; }
-  .band.b2 { left: 58px; width: 6px; background: var(--blue); }
   .ring { position: absolute; border-radius: 50%; left: 50%; top: 18%; width: 360px; height: 360px; transform: translateX(-42%);
     border: 14px solid rgba(255,255,255,.75); box-shadow: 0 0 0 2px rgba(81,176,154,.6), inset 0 0 0 2px rgba(81,176,154,.6); }
-  .ring.r2 { width: 470px; height: 470px; top: 10%; border: 2px dashed rgba(34,75,163,.35); box-shadow: none; animation: turn 60s linear infinite; }
-  @keyframes turn { to { transform: translateX(-42%) rotate(360deg); } }
   .faith { position: absolute; bottom: 0; left: 50%; transform: translateX(-44%); height: 96%; width: auto; filter: drop-shadow(-12px 12px 20px rgba(14,31,74,.28)); }
-  .stamp { position: absolute; left: 34px; top: 120px; width: 104px; height: 104px; border-radius: 50%; z-index: 3; background: var(--navy); color: #fff;
-    display: grid; place-items: center; text-align: center; box-shadow: 0 0 0 4px var(--teal), 0 10px 24px rgba(14,31,74,.35); transform: rotate(-8deg); }
-  .stamp b { display: block; font: 900 34px/.9 "Barlow Condensed"; color: var(--mint); }
-  .stamp span { display: block; font: 800 9px/1.2 "Inter"; letter-spacing: .12em; text-transform: uppercase; }
-  .held { position: absolute; left: 0; bottom: 150px; width: 275px; z-index: 4; transform: rotate(-4deg); background: #fff; border-radius: 16px; padding: 14px 16px 12px;
-    box-shadow: 0 0 0 2px var(--teal), 0 0 24px rgba(81,176,154,.55), 0 18px 34px rgba(14,31,74,.35); }
-  .held-top { display: flex; align-items: center; justify-content: space-between; }
-  .held-top b { font: 800 10.5px/1 "Inter"; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); }
-  .held-top span { font: 800 10px/1 "Inter"; color: #fff; background: var(--teal); border-radius: 999px; padding: 5px 9px; letter-spacing: .06em; }
-  .held h5 { font: 900 25px/1 "Barlow Condensed"; text-transform: uppercase; color: var(--navy); margin-top: 8px; }
-  .held ul { list-style: none; margin-top: 8px; }
-  .held li { display: flex; align-items: center; gap: 8px; font: 600 12.5px/1.3 "Inter"; padding: 5px 0; border-top: 1px dashed var(--line); }
-  .held li::before { content: "✓"; width: 17px; height: 17px; flex: 0 0 17px; border-radius: 50%; background: var(--teal); color: #fff; font: 900 10px/17px "Inter"; text-align: center; }
-  .held .note { margin-top: 6px; font: 600 11px/1.3 "Inter"; color: var(--muted); }
 
   /* ---------- Talk: right in the middle ---------- */
   .talk { position: relative; z-index: 5; margin-top: -86px; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 16px; }
@@ -124,7 +104,7 @@
   .caps-title h2 { font: 900 40px/1 "Barlow Condensed"; text-transform: uppercase; color: var(--navy); }
   .caps-title img { height: 64px; }
   .caps .sub { text-align: center; color: var(--muted); margin-top: 8px; }
-  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 30px; }
+  .cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; margin-top: 30px; }
   .card { position: relative; isolation: isolate; border-radius: 16px; padding: 18px 16px; animation: glow 3.6s ease-in-out infinite; }
   .card::before { content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -2;
     background: conic-gradient(from var(--a), #d7ece6 0 50%, var(--teal2) 66%, var(--blue) 78%, var(--mint) 88%, #d7ece6 100%);
@@ -141,7 +121,8 @@
   .card .ic { width: 38px; height: 38px; border-radius: 11px; background: var(--navy2); display: grid; place-items: center; }
   .card .ic svg { width: 20px; height: 20px; stroke: var(--teal2); fill: none; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
   .card h3 { font: 800 16px/1.2 "Inter"; color: var(--navy); margin-top: 12px; }
-  .card p { font-size: 14px; line-height: 1.45; color: var(--muted); margin-top: 5px; }
+  .card p { font-size: 14px; line-height: 1.45; color: var(--muted); margin-top: 6px; }
+  .card p em { font-style: normal; font-weight: 800; color: var(--teal); }
   .try { margin-top: 34px; text-align: center; }
   .try h3 { font: 900 24px/1 "Barlow Condensed"; text-transform: uppercase; color: var(--navy); }
   .try .chips { justify-content: center; margin-top: 14px; }
@@ -170,18 +151,17 @@
     .copy { padding: 34px 0 20px; }
     .stage { min-height: 660px; margin: 0 -24px; overflow: hidden; }
     .panel { inset: 0; clip-path: none; }
-    .band { left: 12px; } .band.b2 { left: 36px; }
-    .ring { width: 300px; height: 300px; } .ring.r2 { width: 380px; height: 380px; }
-    .stamp { left: 18px; top: 40px; width: 88px; height: 88px; } .stamp b { font-size: 28px; }
-    .held { left: 16px; bottom: 178px; width: 250px; }
-    .held h5 { font-size: 21px; } .held li { font-size: 11.5px; }
+    .band { left: 12px; }
+    .ring { width: 300px; height: 300px; }
     .cards { grid-template-columns: 1fr 1fr; }
+    .card:last-child { grid-column: 1 / -1; }
     .caps-title h2, .talk h2 { font-size: 32px; }
     .caps-title img { height: 50px; }
     .cta h2 { font-size: 38px; }
   }
   @media (max-width: 520px) {
     .cards { grid-template-columns: 1fr; }
+    .card:last-child { grid-column: auto; }
     .go { font-size: 24px; padding: 12px 24px 12px 12px; }
     .foot img { height: 56px; }
   }
@@ -203,28 +183,16 @@
       <div class="copy">
         <div class="kicker">Built for Master-Halco</div>
         <h1>Hi, I'm<br><em>F<span class="ai">ai</span>th.</em></h1>
-        <p class="lede">I'll chat with your contractors, their crews and your counter, <span>by voice or text, day or night, in English or Spanish.</span></p>
-        <div class="chips"><span class="chip">Voice or text</span><span class="chip">Always on</span><span class="chip">English &amp; Español</span></div>
+        <p class="lede">I'll chat with your contractors, their crews and your counter.</p>
         <div class="video" id="video" hidden>
           <video controls playsinline preload="metadata" poster="/faith.jpg"></video>
         </div>
       </div>
       <div class="stage" aria-hidden="true">
         <div class="panel"></div>
-        <div class="band"></div><div class="band b2"></div>
-        <div class="ring r2"></div><div class="ring"></div>
+        <div class="band"></div>
+        <div class="ring"></div>
         <img class="faith" src="/faith-cut.webp" alt="">
-        <div class="stamp"><div><b>24/7</b><span>Always<br>on shift</span></div></div>
-        <div class="held">
-          <div class="held-top"><b>Order check</b><span>READY</span></div>
-          <h5>Nothing missing.</h5>
-          <ul>
-            <li>Posts laid out evenly, no short sections</li>
-            <li>Gate hardware complete: hinges, latch, drop rod</li>
-            <li>Concrete counted for every post</li>
-          </ul>
-          <div class="note">Sent to the Master-Halco counter, ready to pull.</div>
-        </div>
       </div>
     </div>
   </section>
@@ -257,23 +225,18 @@
 
   <section class="wrap caps">
     <div class="caps-title"><h2>What I do for</h2><img src="/logo.webp" alt="Master-Halco"></div>
-    <p class="sub">One assistant working for every branch, starting with OKC.</p>
     <div class="cards">
-      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3 3 0 0 1 0 6M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></div><h3>Talk to contractors</h3><p>Straight answers by voice or text, without tying up the counter.</p></div>
-      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-5 7 5v11M10 21v-6h4v6"/></svg></div><h3>Talk to their crews</h3><p>Crews reach me from the job site and get answers in seconds.</p></div>
-      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h3"/></svg></div><h3>Build lists fast</h3><p>Describe the job and the material list is ready for the counter.</p></div>
-      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></div><h3>Catch mistakes</h3><p>Missing pieces like gate hardware get flagged before the order goes out.</p></div>
-      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Work 24/7</h3><p>Nights and weekends, Master-Halco is still answering.</p></div>
-      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div><h3>Hablo español</h3><p>I switch languages the moment a contractor or crew does.</p></div>
-      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><h3>Hand off to the counter</h3><p>Pricing, stock and orders stay with your people, details ready.</p></div>
-      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 7h6M8 11h6"/></svg></div><h3>Learn Master-Halco</h3><p>Your products, item codes and policies, so I sound like your team.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3 3 0 0 1 0 6M21 20c0-2.6-1.6-4.8-4-5.6"/></svg></div><h3>Answers contractors and crews</h3><p><em>so</em> your counter can keep selling.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h3"/></svg></div><h3>Builds material lists in seconds</h3><p><em>so</em> orders are ready before they call.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></div><h3>Catches mistakes before they ship</h3><p><em>so</em> you cut returns and second trips.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>On shift 24/7</h3><p><em>so</em> you never miss a night or weekend order.</p></div>
+      <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div><h3>Hablo español</h3><p><em>so</em> every crew is served in their language.</p></div>
     </div>
     <div class="try">
       <h3>Try asking me</h3>
       <div class="chips">
         <button type="button">180 feet of 6 ft cedar board-on-board with a 4 ft walk gate.</button>
         <button type="button">What do I need for 200 feet of chain-link with one corner?</button>
-        <button type="button">Add a 12 ft double drive gate.</button>
         <button type="button">¿Me lo puedes explicar en español?</button>
       </div>
     </div>
@@ -281,14 +244,14 @@
 
   <section class="cta">
     <div class="wrap">
-      <div><h2>Ask me anything.</h2><p>Voice or text, day or night, in English or Spanish.</p></div>
+      <div><h2>Ask me anything.</h2><p>Talk or type, in English or Spanish.</p></div>
       <button class="go" id="go2" type="button"><i><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></i>Chat with Faith</button>
     </div>
   </section>
   <footer class="foot">
     <div class="wrap">
       <img src="/logo.webp" alt="Master-Halco Fence &amp; Deck Supply">
-      <p>Faith is an AI assistant. Material lists are estimates; stock, pricing and final orders stay with the Master-Halco counter.</p>
+      <p>Faith is an AI assistant. Pricing and final orders stay with the Master-Halco counter.</p>
     </div>
   </footer>
 
