@@ -78,7 +78,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("accept-ranges", "bytes")
         if partial:
             self.send_header("content-range", f"bytes {start}-{end}/{size}")
-        self.send_header("cache-control", "no-cache" if file.suffix == ".html" else "public, max-age=3600")
+        self.send_header("cache-control", "no-cache" if file.suffix == ".html" else "public, max-age=300")
         self.end_headers()
         if head_only:
             return
