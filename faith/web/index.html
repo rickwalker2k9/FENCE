@@ -258,12 +258,23 @@
     const talk = $("talk"), orb = $("orb"), lines = $("lines"), err = $("err");
     let conv = null, textMode = false, muted = false, pending = null;
 
+    // Like Claire on the Vantage page: who Faith is talking with, and how the
+    // last conversation ended, remembered in this browser only.
+    const MEM = "faith-visitor";
+    function recall() { try { return JSON.parse(localStorage.getItem(MEM) || "null") || {}; } catch { return {}; } }
+    function remember(patch) { try { localStorage.setItem(MEM, JSON.stringify({ ...recall(), ...patch, at: Date.now() })); } catch {} }
+    function ago(t) {
+      const d = Math.round((Date.now() - t) / 86400000);
+      return d < 1 ? "earlier today" : d < 2 ? "yesterday" : d < 14 ? d + " days ago" : "a while back";
+    }
+
     function setStatus(s, h) { $("status").textContent = s; if (h !== undefined) $("hint").textContent = h; }
     function showError(msg) { err.hidden = false; err.innerHTML = msg + ' <a href="' + FALLBACK + '" target="_blank" rel="noopener">Open Faith\'s chat page</a>'; }
     function addLine(who, text) {
       const d = document.createElement("div");
       d.className = "msg " + who; d.textContent = text;
       lines.appendChild(d); lines.scrollTop = lines.scrollHeight;
+      remember({ lines: [...(recall().lines || []), { who, text }].slice(-12) });
     }
     function reset() {
       conv = null; talk.classList.remove("on"); orb.classList.remove("speaking");
@@ -295,9 +306,20 @@
             if (text) addLine((role || source) === "user" ? "you" : "her", text);
           },
         };
-        if (textMode) { opts.textOnly = true; opts.overrides = { conversation: { textOnly: true } }; }
+        const me = recall(), past = (me.lines || []).slice(-8);
+        opts.clientTools = {
+          remember_visitor: ({ name, company }) => { if (name) remember({ name: String(name).slice(0, 40), company: company ? String(company).slice(0, 60) : me.company }); return "saved"; },
+        };
+        opts.overrides = {};
+        if (me.name) opts.overrides.agent = { firstMessage: "Hey " + me.name + ", good to have you back! Want to pick up where we left off, or start something new?" };
+        if (textMode) { opts.textOnly = true; opts.overrides.conversation = { textOnly: true }; }
         else opts.connectionType = "webrtc";
         conv = await window.ElevenLabsClient.Conversation.startSession(opts);
+        if (me.name || past.length) {
+          conv.sendContextualUpdate((me.name ? "You've talked with " + me.name + (me.company ? " from " + me.company : "") + " before" : "You've talked with this person before") + " (" + ago(me.at || Date.now()) + "). " +
+            (past.length ? "The last conversation ended like this:\n" + past.map((l) => (l.who === "you" ? "Them" : "You (Faith)") + ": " + l.text).join("\n") + "\nIf they want to pick up there, carry on from it. " : "") +
+            (me.name ? "Don't ask their name again." : "You don't know their name yet."));
+        }
       } catch (e) {
         reset();
         const denied = /permission|notallowed|denied/i.test(String((e && (e.name || e.message)) || e));
