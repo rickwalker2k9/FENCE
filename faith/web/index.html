@@ -15,7 +15,9 @@
   @font-face { font-family: "Barlow Condensed"; font-weight: 700; font-display: swap; src: url("/fonts/barlow-condensed-700.woff2") format("woff2"); }
   @font-face { font-family: "Barlow Condensed"; font-weight: 800; font-display: swap; src: url("/fonts/barlow-condensed-800.woff2") format("woff2"); }
   @font-face { font-family: "Barlow Condensed"; font-weight: 900; font-display: swap; src: url("/fonts/barlow-condensed-900.woff2") format("woff2"); }
-  :root { --blue:#224ba3; --navy:#0e1f4a; --navy2:#13285c; --teal:#51b09a; --teal2:#7fd3bf; --mint:#a6ecd9; --ink:#1b2233; --muted:#5a6478; --line:#e3e8f0; }
+  @font-face { font-family: "League Gothic"; font-weight: 400; font-display: swap; src: url("/fonts/league-gothic-400.woff2") format("woff2"); }
+  @font-face { font-family: "Inter Tight"; font-weight: 700; font-display: swap; src: url("/fonts/inter-tight-700.woff2") format("woff2"); }
+  :root { --blue:#38476b; --navy:#121521; --navy2:#1c2033; --teal:#b6192e; --teal2:#ffc1ac; --mint:#ffc1ac; --ink:#121521; --muted:#4f5568; --line:#ebe5e6; --grad:linear-gradient(45deg, #121521 0%, #38476b 33%, #b6192e 68%, #ffc1ac 100%); }
   @property --a { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -25,14 +27,14 @@
 
   /* ---------- Masthead: white, big logo ---------- */
   .mast { position: relative; background: #fff; overflow: hidden; }
-  .mast::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: linear-gradient(90deg, var(--teal) 0 55%, var(--blue) 55% 100%); }
+  .mast::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: var(--grad); }
   .mast-lattice { position: absolute; right: 0; top: 0; bottom: 0; width: 50%;
-    background: repeating-linear-gradient(45deg, rgba(81,176,154,.22) 0 1.2px, transparent 1.2px 22px),
-                repeating-linear-gradient(-45deg, rgba(34,75,163,.12) 0 1.2px, transparent 1.2px 22px);
+    background: repeating-linear-gradient(45deg, rgba(182,25,46,.22) 0 1.2px, transparent 1.2px 22px),
+                repeating-linear-gradient(-45deg, rgba(56,71,107,.12) 0 1.2px, transparent 1.2px 22px);
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 80%); mask-image: linear-gradient(90deg, transparent, #000 80%); }
   .mast .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 18px; padding-bottom: 22px; }
   .mast-logo { height: 92px; width: auto; display: block; }
-  .mast-talk { font: 800 13px/1 "Inter"; letter-spacing: .14em; text-transform: uppercase; color: #fff; background: var(--blue); border: 0; border-radius: 999px; padding: 13px 18px; cursor: pointer; text-decoration: none; box-shadow: 0 0 0 3px rgba(81,176,154,.35); }
+  .mast-talk { font: 800 13px/1 "Inter"; letter-spacing: .14em; text-transform: uppercase; color: #fff; background: var(--blue); border: 0; border-radius: 999px; padding: 13px 18px; cursor: pointer; text-decoration: none; box-shadow: 0 0 0 3px rgba(182,25,46,.35); }
 
   /* ---------- Hero ---------- */
   .hero { position: relative; }
@@ -40,49 +42,48 @@
   .copy { padding: 56px 0 120px; }
   .kicker { display: inline-flex; align-items: center; gap: 10px; font: 800 12px/1 "Inter"; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); }
   .kicker::before { content: ""; width: 30px; height: 2px; background: var(--teal); }
-  h1 { font: 900 clamp(96px, 12.5vw, 156px)/.84 "Barlow Condensed"; text-transform: uppercase; color: var(--navy); margin-top: 14px; }
-  h1 em { display: block; font-style: normal; color: var(--blue); }
-  h1 .hi { display: block; text-transform: none; font-size: .42em; line-height: 1; letter-spacing: 0; word-spacing: -.02em; margin-bottom: .06em; }
-  h1 em .ai { color: var(--teal); }
+  h1 { margin-top: 14px; }
+  h1 .hi { display: block; font: 700 clamp(40px, 5vw, 58px)/1 "Inter Tight"; letter-spacing: -.045em; color: var(--navy); }
+  .fword { display: block; width: min(100%, 470px); height: auto; margin-top: 12px; }
   .lede { margin-top: 20px; font: 600 clamp(18px, 2vw, 22px)/1.4 "Inter"; color: var(--navy); max-width: 520px; }
   .lede span { color: var(--blue); }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-  .chip { font: 700 12px/1 "Inter"; color: var(--navy); background: #eef6f3; border: 1px solid rgba(81,176,154,.55); border-radius: 999px; padding: 8px 12px; }
+  .chip { font: 700 12px/1 "Inter"; color: var(--navy); background: #fbf1ef; border: 1px solid rgba(182,25,46,.55); border-radius: 999px; padding: 8px 12px; }
 
   .video { margin-top: 28px; width: 290px; max-width: 100%; border-radius: 18px; overflow: hidden; background: var(--navy); position: relative;
-    box-shadow: 0 0 0 2px var(--teal), 0 0 28px rgba(81,176,154,.45), 0 20px 40px rgba(14,31,74,.25); }
+    border: 3px solid transparent; background: linear-gradient(#121521,#121521) padding-box, var(--grad) border-box; box-shadow: 0 20px 40px rgba(18,21,33,.25); }
   .video video { display: block; width: 100%; height: auto; aspect-ratio: 720 / 1280; object-fit: cover; background: #000; }
   .video[hidden] { display: none; }
 
   /* Faith, full height, with layers behind her */
   .stage { position: relative; min-height: 640px; }
-  .panel { position: absolute; inset: 0 -60px 0 0; background: linear-gradient(170deg, #eaf6f2 0%, #cfe9e1 45%, #a9d7ca 100%);
+  .panel { position: absolute; inset: 0 -60px 0 0; background: linear-gradient(170deg, #fbf7f6 0%, #f3e8e5 50%, #e4e6ee 100%);
     clip-path: polygon(16% 0, 100% 0, 100% 100%, 0 100%); }
-  .band { position: absolute; top: 0; bottom: 0; left: 30px; width: 18px; background: var(--teal); transform: skewX(-5.5deg); transform-origin: top; }
+  .band { position: absolute; top: 0; bottom: 0; left: 30px; width: 18px; background: linear-gradient(180deg, #38476b, #b6192e 60%, #ffc1ac); transform: skewX(-5.5deg); transform-origin: top; }
   .ring { position: absolute; border-radius: 50%; left: 50%; top: 18%; width: 360px; height: 360px; transform: translateX(-42%);
-    border: 14px solid rgba(255,255,255,.75); box-shadow: 0 0 0 2px rgba(81,176,154,.6), inset 0 0 0 2px rgba(81,176,154,.6); }
-  .hero-faith { position: absolute; bottom: 0; left: 50%; transform: translateX(-44%); height: 96%; width: auto; filter: drop-shadow(-12px 12px 20px rgba(14,31,74,.28)); }
+    border: 14px solid rgba(255,255,255,.75); box-shadow: 0 0 0 2px rgba(182,25,46,.6), inset 0 0 0 2px rgba(182,25,46,.6); }
+  .hero-faith { position: absolute; bottom: 0; left: 50%; transform: translateX(-44%); height: 96%; width: auto; filter: drop-shadow(-12px 12px 20px rgba(18,21,33,.28)); }
 
   /* ---------- Talk: right in the middle ---------- */
   .talk { position: relative; z-index: 5; margin-top: 90px; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 16px; }
-  .talk-card { width: min(640px, 100%); background: #fff; border-radius: 28px; padding: 26px 24px 22px; position: relative; isolation: isolate;
-    box-shadow: 0 26px 60px rgba(14,31,74,.22), 0 2px 8px rgba(14,31,74,.1); }
+  .talk-card { width: min(640px, 100%); border: 3px solid transparent; background: linear-gradient(#fff,#fff) padding-box, var(--grad) border-box; border-radius: 28px; padding: 26px 24px 22px; position: relative; isolation: isolate;
+    box-shadow: 0 26px 60px rgba(18,21,33,.22), 0 2px 8px rgba(18,21,33,.1); }
   .orb { position: relative; width: 132px; height: 132px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; background: none; margin: -92px auto 0; display: block; }
   .orb img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: 50% 50%; border: 5px solid #fff; position: relative; z-index: 2; }
   .orb::before { content: ""; position: absolute; inset: -9px; border-radius: 50%; z-index: 1;
-    background: conic-gradient(from var(--a), var(--teal), var(--blue), var(--mint), var(--teal)); animation: spin 3.2s linear infinite; }
+    background: conic-gradient(from var(--a), #121521, #38476b, #b6192e, #ffc1ac, #121521); animation: spin 3.2s linear infinite; }
   .orb::after { content: ""; position: absolute; inset: -9px; border-radius: 50%; z-index: 0; border: 3px solid var(--teal); animation: pulse 1.8s ease-out infinite; }
   .talk.on .orb { width: 92px; height: 92px; margin-top: -70px; }
   .talk.on .live { margin-top: 10px; }
   .orb.speaking::after { animation-duration: .9s; border-color: var(--blue); }
   @keyframes spin { to { --a: 360deg; } }
   @keyframes pulse { from { transform: scale(1); opacity: .9; } to { transform: scale(1.35); opacity: 0; } }
-  .talk h2 { font: 900 40px/1 "Barlow Condensed"; text-transform: uppercase; color: var(--navy); margin-top: 14px; }
+  .talk h2 { font: 400 48px/1 "League Gothic"; text-transform: uppercase; color: var(--navy); margin-top: 14px; }
   .talk h2 em { font-style: normal; color: var(--blue); }
   .talk .sub { color: var(--muted); margin-top: 6px; font-size: 15px; }
   .go { margin-top: 18px; display: inline-flex; align-items: center; gap: 14px; border: 0; cursor: pointer; border-radius: 999px; padding: 14px 30px 14px 14px;
-    background: linear-gradient(135deg, var(--blue), #2f62c9); color: #fff; font: 900 28px/1 "Barlow Condensed"; text-transform: uppercase; letter-spacing: .02em;
-    box-shadow: 0 0 0 4px rgba(81,176,154,.45), 0 0 34px rgba(81,176,154,.55), 0 14px 30px rgba(34,75,163,.35); transition: transform .15s; }
+    background: var(--grad); color: #fff; font: 400 34px/1 "League Gothic"; text-transform: uppercase; letter-spacing: .03em;
+    box-shadow: 0 0 0 4px rgba(182,25,46,.45), 0 0 34px rgba(182,25,46,.55), 0 14px 30px rgba(56,71,107,.35); transition: transform .15s; }
   .go:hover { transform: translateY(-2px); }
   .go i { width: 44px; height: 44px; border-radius: 50%; background: var(--teal); display: grid; place-items: center; }
   .go svg { width: 22px; height: 22px; stroke: var(--navy); fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
@@ -91,19 +92,19 @@
   .talk.on .live { display: block; }
   .talk.on .idle { display: none; }
   .status { display: flex; align-items: center; justify-content: center; gap: 8px; font: 800 12px/1 "Inter"; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); }
-  .status::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px rgba(81,176,154,.25); }
+  .status::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px rgba(182,25,46,.25); }
   .hint { text-align: center; color: var(--muted); font-size: 13.5px; margin-top: 6px; }
   .lines { margin-top: 14px; max-height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
   .msg { font-size: 15px; line-height: 1.45; padding: 9px 13px; border-radius: 16px; max-width: 86%; text-align: left; overflow-wrap: anywhere; }
-  .msg.you { background: #eef2f8; align-self: flex-end; border-bottom-right-radius: 5px; }
+  .msg.you { background: #f1f2f6; align-self: flex-end; border-bottom-right-radius: 5px; }
   .msg.her { background: var(--blue); color: #fff; align-self: flex-start; border-bottom-left-radius: 5px; }
   .type { display: flex; gap: 8px; margin-top: 12px; }
   .type input { flex: 1; min-width: 0; border: 1.5px solid var(--line); border-radius: 999px; padding: 12px 16px; font: 500 15px "Inter"; outline: none; }
-  .type input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(81,176,154,.25); }
+  .type input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(182,25,46,.25); }
   .type button, .ctl button { border: 0; border-radius: 999px; padding: 12px 18px; font: 800 13px "Inter"; cursor: pointer; }
   .type button { background: var(--teal); color: var(--navy); }
   .ctl { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
-  .ctl .mute { background: #eef2f8; color: var(--navy); }
+  .ctl .mute { background: #f1f2f6; color: var(--navy); }
   .ctl .end { background: #e9765f; color: #fff; }
   .err { color: #b4402c; font-size: 14px; margin-top: 10px; }
   .err a { color: var(--blue); }
@@ -111,12 +112,12 @@
   /* ---------- Capabilities with glowing rims ---------- */
   .caps { padding: 70px 0 30px; }
   .caps-title { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
-  .caps-title h2 { font: 900 40px/1 "Barlow Condensed"; text-transform: uppercase; color: var(--navy); }
+  .caps-title h2 { font: 400 50px/1 "League Gothic"; text-transform: uppercase; color: var(--navy); }
   .caps-title img { height: 64px; }
   .caps .sub { text-align: center; color: var(--muted); margin-top: 8px; }
   .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 56px; max-width: 900px; margin: 30px auto 0; }
   .card { display: grid; grid-template-columns: 44px 1fr; column-gap: 14px; align-items: start; padding: 16px 0; border-bottom: 1px solid var(--line); }
-  .card .ic { grid-row: span 2; width: 44px; height: 44px; border-radius: 50%; background: #e8f5f1; display: grid; place-items: center; }
+  .card .ic { grid-row: span 2; width: 44px; height: 44px; border-radius: 50%; background: #f8eeec; display: grid; place-items: center; }
   .card .ic svg { width: 21px; height: 21px; stroke: var(--blue); fill: none; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
   .card h3 { font: 800 17px/1.25 "Inter"; color: var(--navy); }
   .card p { font-size: 15px; line-height: 1.45; color: var(--muted); margin-top: 3px; }
@@ -128,15 +129,15 @@
   .try button:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   /* ---------- Footer ---------- */
-  .cta { position: relative; margin-top: 60px; background: var(--blue); color: #fff; overflow: hidden; }
+  .cta { position: relative; margin-top: 60px; background: var(--grad); color: #fff; overflow: hidden; }
   .cta::before { content: ""; position: absolute; inset: 0;
     background: repeating-linear-gradient(45deg, rgba(255,255,255,.07) 0 1.2px, transparent 1.2px 24px),
                 repeating-linear-gradient(-45deg, rgba(255,255,255,.07) 0 1.2px, transparent 1.2px 24px); }
-  .cta::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px; background: var(--teal); }
+  .cta::after { content: none; }
   .cta .wrap { display: flex; align-items: center; justify-content: center; padding-top: 40px; padding-bottom: 36px; }
   .cta h2 { font: 900 48px/.95 "Barlow Condensed"; text-transform: uppercase; }
   .cta p { color: #dbe4f5; margin-top: 6px; }
-  .cta .go { background: #fff; color: var(--blue); margin-top: 0; white-space: normal; text-align: left; }
+  .cta .go { background: #fff; color: var(--navy); margin-top: 0; white-space: normal; text-align: left; }
   .foot { background: #fff; }
   .foot .wrap { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-top: 22px; padding-bottom: 26px; flex-wrap: wrap; }
   .foot img { height: 70px; }
@@ -178,7 +179,7 @@
     <div class="wrap">
       <div class="copy">
         <div class="kicker">Built for Master-Halco</div>
-        <h1><span class="hi">Hi, I&rsquo;m</span><em>F<span class="ai">ai</span>th.</em></h1>
+        <h1><span class="hi">Say hello to</span><img class="fword" src="/faith-word.webp" alt="Faith" width="1000" height="483"></h1>
         <p class="lede">I'll chat with your contractors, your crews and your counter.</p>
         <div class="video" id="video">
           <video src="/faith-720.mp4" controls playsinline preload="metadata" poster="/faith-video-cover.jpg"></video>
