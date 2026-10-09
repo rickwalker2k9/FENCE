@@ -1,6 +1,6 @@
 """Webhook tools for the Faith voice/chat agent.
 
-    GET  /                       the "Chat with Faith" page (faith/web/)
+    GET  /                       the "Chat with Faith" page and its files (faith/web/)
     POST /tools/fence_estimate   JSON job in, takeoff out (see docs/faith/setup.md)
     GET  /health
 
@@ -21,7 +21,8 @@ from faith.estimator import EstimateError, estimate
 
 MAX_BODY = 64 * 1024
 WEB = Path(__file__).with_name("web")
-STATIC = {"/": ("index.html", "text/html; charset=utf-8"), "/faith.jpg": ("faith.jpg", "image/jpeg"), "/logo.jpg": ("logo.jpg", "image/jpeg")}
+TYPES = {".html": "text/html; charset=utf-8", ".jpg": "image/jpeg", ".png": "image/png", ".webp": "image/webp",
+         ".mp4": "video/mp4", ".webm": "video/webm", ".js": "text/javascript; charset=utf-8"}
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -40,21 +41,56 @@ class Handler(BaseHTTPRequestHandler):
         sent = self.headers.get("x-faith-key", "")
         return bool(key) and hmac.compare_digest(key.encode(), sent.encode())
 
-    def do_GET(self):
+    def do_GET(self, head_only: bool = False):
         path = self.path.split("?")[0]
         if path == "/health":
             return self._send(200, {"ok": True})
-        if path in STATIC:
-            name, ctype = STATIC[path]
-            data = (WEB / name).read_bytes()
-            self.send_response(200)
-            self.send_header("content-type", ctype)
-            self.send_header("content-length", str(len(data)))
-            self.send_header("cache-control", "public, max-age=300")
-            self.end_headers()
-            self.wfile.write(data)
-            return
+        name = "index.html" if path == "/" else path.lstrip("/")
+        file = WEB / name
+        if "/" not in name and file.suffix in TYPES and file.is_file():
+            return self._file(file, head_only)
         self._send(404, {"error": "not found"})
+
+    def do_HEAD(self):
+        self.do_GET(head_only=True)
+
+    def _file(self, file: Path, head_only: bool) -> None:
+        # Byte ranges so phones (Safari especially) can stream the video.
+        size = file.stat().st_size
+        start, end = 0, size - 1
+        rng = self.headers.get("range", "")
+        if rng.startswith("bytes="):
+            a, _, b = rng[6:].split(",")[0].partition("-")
+            try:
+                start, end = (int(a), int(b) if b else size - 1) if a else (max(size - int(b), 0), size - 1)
+            except ValueError:
+                start, end = 0, size - 1
+            end = min(end, size - 1)
+            if start > end:
+                self.send_response(416)
+                self.send_header("content-range", f"bytes */{size}")
+                self.end_headers()
+                return
+        partial = rng.startswith("bytes=")
+        self.send_response(206 if partial else 200)
+        self.send_header("content-type", TYPES[file.suffix])
+        self.send_header("content-length", str(end - start + 1))
+        self.send_header("accept-ranges", "bytes")
+        if partial:
+            self.send_header("content-range", f"bytes {start}-{end}/{size}")
+        self.send_header("cache-control", "no-cache" if file.suffix == ".html" else "public, max-age=3600")
+        self.end_headers()
+        if head_only:
+            return
+        with file.open("rb") as f:
+            f.seek(start)
+            left = end - start + 1
+            while left > 0:
+                chunk = f.read(min(left, 256 * 1024))
+                if not chunk:
+                    break
+                self.wfile.write(chunk)
+                left -= len(chunk)
 
     def do_POST(self):
         if self.path.split("?")[0] != "/tools/fence_estimate":
